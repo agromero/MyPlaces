@@ -12,7 +12,7 @@ import UIKit
 class FirstViewController: UITableViewController {
     
     let m_provider = ManagerPlaces.shared
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +43,11 @@ class FirstViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Detectar pulsación en un elemento.
+        let place: Place = self.m_provider.GetItemAt(position: indexPath.row)
+        
+        let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+        dc.place = place
+        present(dc, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -66,6 +71,7 @@ class FirstViewController: UITableViewController {
         
     }
    
+  
     
     ///////////////////
 

@@ -11,12 +11,30 @@ import UIKit
 class DetailController: UIViewController {
 
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var imagePicked: UIImageView!
+    @IBOutlet weak var textName: UITextField!
+    @IBOutlet weak var textDescription: UITextView!
+    
+    var place:Place? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.constraintHeight.constant = 400
         // Do any additional setup after loading the view.
+        
+        if(place != nil){
+            
+            //Premen a la llista
+           textName.text = place!.name
+        }
+        else{
+            
+            // Es nou
+            textName.text = ""
+       }
+
     }
 
     override func didReceiveMemoryWarning() {
