@@ -27,12 +27,14 @@ class DetailController: UIViewController {
         if(place != nil){
             
             //Premen a la llista
-           textName.text = place!.name
+            textName.text = place!.name
+            textDescription.text = place!.description
         }
         else{
             
             // Es nou
             textName.text = ""
+            textDescription.text = "New Place to be Added"
        }
 
     }
