@@ -12,6 +12,7 @@ class DetailController: UIViewController {
 
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var viewPicker: UIPickerView!
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var textName: UITextField!
     @IBOutlet weak var textDescription: UITextView!
@@ -20,7 +21,7 @@ class DetailController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
         self.constraintHeight.constant = 400
         // Do any additional setup after loading the view.
         
@@ -28,6 +29,10 @@ class DetailController: UIViewController {
             
             //Premen a la llista
             textName.text = place!.name
+            
+            
+            //Temporalment afegim un border a la imatge mentre no disposem d'imatges
+            imagePicked.layer.borderWidth = 1
             textDescription.text = place!.description
         }
         else{

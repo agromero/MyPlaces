@@ -60,18 +60,25 @@ class FirstViewController: UITableViewController {
         //seleccionada.
         
         let celda = UITableViewCell(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: tableView.frame.size.width, height: 100)))
+      
+        celda.textLabel?.text = m_provider.GetItemAt(position: indexPath.row).name
         
-        let etiqueta = UILabel(frame: celda.frame)
-        
-        etiqueta.text = m_provider.GetItemAt(position: indexPath.row).name
-        etiqueta.sizeToFit()
-        
-        celda.contentView.addSubview(etiqueta)
+        //No funciona per pintar el subtítol
+        //celda.detailTextLabel?.text =  m_provider.GetItemAt(position: indexPath.row).description
+
         return celda
         
     }
    
   
+    
+    //NSDictionary *item = (NSDictionary *)[self.content objectAtIndex:indexPath.row];
+    //cell.textLabel.text = [item objectForKey:@"mainTitleKey"];
+    //cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
+    //NSString *path = [[NSBundle mainBundle] pathForResource:[item objectForKey:@"imageKey"] ofType:@"png"];
+    //UIImage *theImage = [UIImage imageWithContentsOfFile:path];
+    //cell.imageView.image = theImage;
+    //return cell;
     
     ///////////////////
 
