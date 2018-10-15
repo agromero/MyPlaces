@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
         let pl1 = Place(name: "Title Place1", description: "Esta es la descipción del Place 1, todavía falta contenido, pero por ahora es suficiente con este texto de prueba para comprobar que se visualiza correctamente por pantalla", image_in: nil)
         let pl2 = Place(name: "Title Place2", description: "Aqui se tiene que poner la descripción del Place 2, ya que es un lugar increíble que nadie debe perderse, os lo recomiendo 100% si tenéis la oportunidad de visitarlo", image_in: nil)
-        let pl3 = Place(name: "Title Place3", description: "El Place 3 es sin duda uno de los mejores lugares que podéis encontrar en esta app, aunque de momento solamente está disponible este texto de prueba.", image_in: nil)
+        let pl3 = Place(type: .TouristicPlace, name: "Title Place3", description: "El Place 3 es sin duda uno de los mejores lugares que podéis encontrar en esta app, aunque de momento solamente está disponible este texto de prueba.", image_in: nil)
         let pl4 = Place(name: "Title Place4", description: "Aqui está el Place 4, con su texto de prueba y unas pocas palabras para rellenar este espacio provisional donde irá la descripción real del sitio.", image_in: nil)
         manager.append(pl1)
         manager.append(pl2)

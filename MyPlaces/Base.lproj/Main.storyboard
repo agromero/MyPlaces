@@ -154,16 +154,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jQb-0j-ZAT">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQb-0j-ZAT">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5cd-dF-rr8">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cd-dF-rr8">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="6R2-GJ-pHF">
-                                                <rect key="frame" x="43" y="309" width="285" height="269"/>
+                                                <rect key="frame" x="43" y="331" width="285" height="246"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -179,10 +177,10 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" text="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Ss-TZ-3Mt">
-                                                <rect key="frame" x="46" y="98" width="229" height="23"/>
+                                                <rect key="frame" x="46" y="128" width="229" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="textColor" red="0.20291044870319691" green="0.19976052331739122" blue="0.70207253886010368" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t4G-mL-uZT">
@@ -190,7 +188,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             </pickerView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N4w-ZN-azc">
-                                                <rect key="frame" x="46" y="127" width="282" height="162"/>
+                                                <rect key="frame" x="46" y="157" width="282" height="162"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbM-3R-dhy">
@@ -218,18 +216,35 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLA-GC-EB7">
-                                                <rect key="frame" x="255" y="100" width="74" height="27"/>
+                                                <rect key="frame" x="255" y="129" width="74" height="27"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <state key="normal" title="Select Image"/>
+                                                <connections>
+                                                    <action selector="SelectImage:" destination="OPN-dn-l27" eventType="touchDown" id="to3-cM-VXl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="5cd-dF-rr8" firstAttribute="leading" secondItem="jQb-0j-ZAT" secondAttribute="leading" id="9PI-Uk-HW9"/>
+                                    <constraint firstItem="5cd-dF-rr8" firstAttribute="height" secondItem="jQb-0j-ZAT" secondAttribute="height" priority="250" id="AqT-fM-bq1"/>
+                                    <constraint firstItem="5cd-dF-rr8" firstAttribute="top" secondItem="jQb-0j-ZAT" secondAttribute="top" id="KBR-Aa-tHA"/>
+                                    <constraint firstAttribute="bottom" secondItem="5cd-dF-rr8" secondAttribute="bottom" id="Mmc-P3-Jgs"/>
+                                    <constraint firstAttribute="trailing" secondItem="5cd-dF-rr8" secondAttribute="trailing" id="sX7-GR-Nkf"/>
+                                    <constraint firstItem="5cd-dF-rr8" firstAttribute="width" secondItem="jQb-0j-ZAT" secondAttribute="width" id="xUx-kf-O5E"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jQb-0j-ZAT" firstAttribute="trailing" secondItem="qRa-vc-7uE" secondAttribute="trailing" id="FbA-Co-jKV"/>
+                            <constraint firstItem="jQb-0j-ZAT" firstAttribute="leading" secondItem="qRa-vc-7uE" secondAttribute="leading" id="Hbv-3h-uFn"/>
+                            <constraint firstItem="jQb-0j-ZAT" firstAttribute="bottom" secondItem="qRa-vc-7uE" secondAttribute="bottom" id="Pau-UP-VQP"/>
+                            <constraint firstItem="jQb-0j-ZAT" firstAttribute="top" secondItem="qRa-vc-7uE" secondAttribute="top" id="uM4-Rq-mY6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="qRa-vc-7uE"/>
                     </view>
                     <connections>
