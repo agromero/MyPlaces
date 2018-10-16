@@ -192,9 +192,9 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbM-3R-dhy">
-                                                <rect key="frame" x="44" y="595" width="51" height="30"/>
+                                                <rect key="frame" x="48" y="595" width="46" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <state key="normal" title="Update"/>
+                                                <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="Update:" destination="OPN-dn-l27" eventType="touchDown" id="4as-v9-ACs"/>
                                                 </connections>
@@ -248,7 +248,10 @@
                         <viewLayoutGuide key="safeArea" id="qRa-vc-7uE"/>
                     </view>
                     <connections>
+                        <outlet property="btnUpdate" destination="WbM-3R-dhy" id="AX6-Er-1XV"/>
+                        <outlet property="constraintHeight" destination="AqT-fM-bq1" id="Ha8-WH-Zub"/>
                         <outlet property="imagePicked" destination="N4w-ZN-azc" id="wyo-E3-Hvx"/>
+                        <outlet property="scrollView" destination="jQb-0j-ZAT" id="4vG-5b-gRv"/>
                         <outlet property="textDescription" destination="6R2-GJ-pHF" id="WgZ-k7-fL6"/>
                         <outlet property="textName" destination="9Ss-TZ-3Mt" id="3dc-VP-pwS"/>
                         <outlet property="viewPicker" destination="t4G-mL-uZT" id="QIm-nK-0sM"/>
