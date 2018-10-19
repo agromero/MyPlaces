@@ -9,7 +9,7 @@
 import UIKit
 
 
-class FirstViewController: UITableViewController {
+class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
     let m_provider = ManagerPlaces.shared
     
@@ -19,6 +19,8 @@ class FirstViewController: UITableViewController {
         let view: UITableView = (self.view as? UITableView)!;
         view.delegate = self
         view.dataSource = self
+        let manager = ManagerPlaces.shared
+        manager.addObserver(object: self)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -71,7 +73,11 @@ class FirstViewController: UITableViewController {
     }
    
   
-    
+    func onPlacesChange()
+    {
+        let view: UITableView = (self.view as? UITableView)!;
+        view.reloadData()
+    }
     //NSDictionary *item = (NSDictionary *)[self.content objectAtIndex:indexPath.row];
     //cell.textLabel.text = [item objectForKey:@"mainTitleKey"];
     //cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
@@ -82,12 +88,6 @@ class FirstViewController: UITableViewController {
     
     ///////////////////
 
-    
-    
-    
-    
-    
-    
     
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		052021EF215A244200532345 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052021EE215A244200532345 /* Place.swift */; };
 		052D3A1A215A3CB10058F01B /* ManagerPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052D3A19215A3CB10058F01B /* ManagerPlaces.swift */; };
+		0541DD322177709800424000 /* ManagerLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0541DD312177709800424000 /* ManagerLocation.swift */; };
 		05A40EE021543C63005FE52C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A40EDF21543C63005FE52C /* AppDelegate.swift */; };
 		05A40EE221543C63005FE52C /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A40EE121543C63005FE52C /* FirstViewController.swift */; };
 		05A40EE421543C63005FE52C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A40EE321543C63005FE52C /* SecondViewController.swift */; };
@@ -17,12 +18,12 @@
 		05A40EEC21543C63005FE52C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05A40EEA21543C63005FE52C /* LaunchScreen.storyboard */; };
 		05A40EF6215442C9005FE52C /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A40EF5215442C9005FE52C /* DetailController.swift */; };
 		05A40EF921544460005FE52C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A40EF821544460005FE52C /* MapKit.framework */; };
-		05A5F35E215BA73B002EBC37 /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = 05A5F35D215BA73A002EBC37 /* sun.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		052021EE215A244200532345 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		052D3A19215A3CB10058F01B /* ManagerPlaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerPlaces.swift; sourceTree = "<group>"; };
+		0541DD312177709800424000 /* ManagerLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerLocation.swift; sourceTree = "<group>"; };
 		05A40EDC21543C63005FE52C /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05A40EDF21543C63005FE52C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05A40EE121543C63005FE52C /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -33,7 +34,6 @@
 		05A40EED21543C63005FE52C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A40EF5215442C9005FE52C /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		05A40EF821544460005FE52C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		05A5F35D215BA73A002EBC37 /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sun.png; path = ../../TableViewSample/TableViewSample/sun.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,6 @@
 		05A40EDE21543C63005FE52C /* MyPlaces */ = {
 			isa = PBXGroup;
 			children = (
-				05A5F35D215BA73A002EBC37 /* sun.png */,
 				05A40EDF21543C63005FE52C /* AppDelegate.swift */,
 				05A40EE121543C63005FE52C /* FirstViewController.swift */,
 				05A40EE321543C63005FE52C /* SecondViewController.swift */,
@@ -78,6 +77,7 @@
 				05A40EE821543C63005FE52C /* Assets.xcassets */,
 				05A40EEA21543C63005FE52C /* LaunchScreen.storyboard */,
 				05A40EED21543C63005FE52C /* Info.plist */,
+				0541DD312177709800424000 /* ManagerLocation.swift */,
 				052D3A19215A3CB10058F01B /* ManagerPlaces.swift */,
 			);
 			path = MyPlaces;
@@ -123,6 +123,7 @@
 				TargetAttributes = {
 					05A40EDB21543C63005FE52C = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -154,7 +155,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05A5F35E215BA73B002EBC37 /* sun.png in Resources */,
 				05A40EEC21543C63005FE52C /* LaunchScreen.storyboard in Resources */,
 				05A40EE921543C63005FE52C /* Assets.xcassets in Resources */,
 				05A40EE721543C63005FE52C /* Main.storyboard in Resources */,
@@ -171,6 +171,7 @@
 				05A40EE421543C63005FE52C /* SecondViewController.swift in Sources */,
 				052D3A1A215A3CB10058F01B /* ManagerPlaces.swift in Sources */,
 				05A40EE021543C63005FE52C /* AppDelegate.swift in Sources */,
+				0541DD322177709800424000 /* ManagerLocation.swift in Sources */,
 				05A40EF6215442C9005FE52C /* DetailController.swift in Sources */,
 				05A40EE221543C63005FE52C /* FirstViewController.swift in Sources */,
 				052021EF215A244200532345 /* Place.swift in Sources */,
@@ -326,7 +327,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = UOC.MyPlaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -344,7 +345,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = UOC.MyPlaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

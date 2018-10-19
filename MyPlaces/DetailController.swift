@@ -32,29 +32,29 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         super.viewDidLoad()
         // Do any additional setup after loading the view.
        
+        //Sempre mostrem el Picker
+        viewPicker.delegate = self
+        viewPicker.dataSource = self
+        
         if(place != nil){
-            
-            //Mostrem un place
-            viewPicker.delegate = self
-            viewPicker.dataSource = self
-            
-            //Picker amb el valor sel.lecionat
+            //Quan és un place existent (UPDATE), mostrem:
+            //Picker amb el valor sel.lecionat, el nom del place, la imatge i la descripció
+
             viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: true)
-            
-            //Nom del Place
             textName.text = place!.name
-            
-            //Imatge: Temporalment afegim un border mentre no disposem d'imatges
-            imagePicked.layer.borderWidth = 1
-            //Descripció
+            imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
             textDescription.text = place!.description
         }
         else{
-            
-            //Es un place Nou
+            //Es un place Nou (NEW), mostrem els camps a omplir
+            var imgdata:Data? = nil
+
             self.btnUpdate.setTitle("New", for: .normal)
-            textName.text = ""
-            textDescription.text = "New Place to be Added"
+            
+
+            textName.text = "Enter Title here"
+            imgdata = imagePicked.image?.jpegData(compressionQuality: 0.75)
+            textDescription.text = "Enter Description here"
        }
         
         // Soft keyboard Control
@@ -62,8 +62,8 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         view.addGestureRecognizer(tap)
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(hideKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(showKeyboard), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         textName.delegate = self
         textDescription.delegate = self    }
 
@@ -85,11 +85,35 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     }
 
     @IBAction func Update(_ sender: Any) {
+        
+        let manager = ManagerPlaces.shared
+
+        //place?.location = ManagerLocation.GetLocation(place)
+
+        if(place != nil){
+            place?.name = textName.text!
+            place?.description = textDescription.text!
+        }
+        else
+        {
+            let selectedtype = Place.PlacesTypes(rawValue: viewPicker.selectedRow(inComponent: 0))
+            
+            let newplace = Place(type: selectedtype!, name: textName.text!, description: textDescription.text!, image_in: nil)
+            
+            manager.append(newplace)
+        }
+        manager.UpdateObservers()
+        dismiss(animated: true, completion: nil)
      }
     
 
     @IBAction func Delete(_ sender: Any) {
-     }
+        let manager: ManagerPlaces = ManagerPlaces.shared
+
+        manager.remove(place!)
+        manager.UpdateObservers()
+        dismiss(animated: true, completion: nil)
+    }
      
     func numberOfComponents(in pickerView: UIPickerView) -> Int
      {
@@ -106,10 +130,13 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
      return pickerElems1[row]
      }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
     {
+// Local variable inserted by Swift 4.2 migrator.
+        let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         view.endEditing(true)
-        let image = info[UIImagePickerControllerOriginalImage] as!
+        let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as!
         UIImage
         imagePicked.contentMode = .scaleAspectFit
         imagePicked.image = image
@@ -157,7 +184,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         if(activeField != nil){
             let userInfo = notification.userInfo!
             let keyboardScreenEndFrame =
-                (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+                (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             let keyboardViewEndFrame =
                 view.convert(keyboardScreenEndFrame, from: view.window)
             keyboardHeight = keyboardViewEndFrame.size.height
@@ -196,4 +223,14 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     }
     */
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

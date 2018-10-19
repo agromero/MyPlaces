@@ -177,10 +177,10 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" text="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Ss-TZ-3Mt">
-                                                <rect key="frame" x="46" y="128" width="229" height="23"/>
+                                                <rect key="frame" x="46" y="133" width="229" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="textColor" red="0.20291044870319691" green="0.19976052331739122" blue="0.70207253886010368" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t4G-mL-uZT">
@@ -192,9 +192,9 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbM-3R-dhy">
-                                                <rect key="frame" x="48" y="595" width="46" height="30"/>
+                                                <rect key="frame" x="46" y="595" width="51" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal" title="Update"/>
                                                 <connections>
                                                     <action selector="Update:" destination="OPN-dn-l27" eventType="touchDown" id="4as-v9-ACs"/>
                                                 </connections>
