@@ -67,8 +67,8 @@ class Place : Codable {
         try container.encode(name, forKey: .name)
         try container.encode(description, forKey: .description)
         
-        try container.encode(location.latitude, forKey:.latitude)
-        try container.encode(location.longitude, forKey:.longitude)
+        //try container.encode(location.latitude, forKey:.latitude)
+        //try container.encode(location.longitude, forKey:.longitude)
     }
     
     func decode(from decoder: Decoder) throws

@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //Singleton
+        /************ Introducció de dades manualment per les proves
         let manager: ManagerPlaces = ManagerPlaces.shared()
 
         let pl1 = Place(name: "Title Place1", description: "Esta es la descipción del Place 1, todavía falta contenido, pero por ahora es suficiente con este texto de prueba para comprobar que se visualiza correctamente por pantalla", image_in: nil)
@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         manager.append(pl2)
         manager.append(pl3)
         manager.append(pl4)
+        *****************************/
         
         return true
     }

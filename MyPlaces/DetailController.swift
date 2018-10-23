@@ -111,7 +111,11 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             
             manager.append(newplace)
         }
+        
+        manager.store()
+        
         manager.UpdateObservers()
+        
         dismiss(animated: true, completion: nil)
      }
     
@@ -120,7 +124,11 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         let manager: ManagerPlaces = ManagerPlaces.shared()
 
         manager.remove(place!)
+        
+        manager.store()
+        
         manager.UpdateObservers()
+        
         dismiss(animated: true, completion: nil)
     }
     
