@@ -24,6 +24,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     var lastOffset:CGPoint!
     
     var place:Place? = nil
+    var imgdata:Data? = nil
 
     // Places types
     let pickerElems1 = ["Generic place", "Touristic place"]
@@ -42,18 +43,18 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
 
             viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: true)
             textName.text = place!.name
-            imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
+            if(place!.image != nil){
+                imagePicked.image = UIImage(data: place!.image!)
+            } else{
+                imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
+            }
             textDescription.text = place!.description
         }
         else{
             //Es un place Nou (NEW), mostrem els camps a omplir
-            var imgdata:Data? = nil
-
-            self.btnUpdate.setTitle("New", for: .normal)
-            
-
+            btnUpdate.setTitle("New", for: .normal)
             textName.text = "Enter Title here"
-            imgdata = imagePicked.image?.jpegData(compressionQuality: 0.75)
+            imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
             textDescription.text = "Enter Description here"
        }
         
@@ -73,12 +74,13 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     }
     
     @IBAction func Close(_ sender: Any) {
+        // En principio no se usa, porque hay un Cancel que hace lo mismo
         dismiss(animated: true, completion: nil)
     }
 
     @IBAction func SelectImage(_ sender: Any) {
         let imagePicker = UIImagePickerController()
-        //imagePicker.delegate = self
+        imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary;
         imagePicker.allowsEditing = false
         self.present(imagePicker, animated: true, completion: nil)
@@ -88,7 +90,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         
         let manager = ManagerPlaces.shared
 
-        //place?.location = ManagerLocation.GetLocation(place)
+        place?.location = ManagerLocation.GetLocation()
 
         if(place != nil){
             place?.name = textName.text!
@@ -97,8 +99,8 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         else
         {
             let selectedtype = Place.PlacesTypes(rawValue: viewPicker.selectedRow(inComponent: 0))
-            
-            let newplace = Place(type: selectedtype!, name: textName.text!, description: textDescription.text!, image_in: nil)
+            let imgdata = imagePicked.image?.jpegData(compressionQuality: 0.75)
+            let newplace = Place(type: selectedtype!, name: textName.text!, description: textDescription.text!, image_in: imgdata)
             
             manager.append(newplace)
         }
@@ -132,7 +134,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
     {
-// Local variable inserted by Swift 4.2 migrator.
+        // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
         view.endEditing(true)

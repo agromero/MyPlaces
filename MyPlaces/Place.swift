@@ -11,11 +11,21 @@ import MapKit
 
 
 
-class Place {
+class Place : Codable {
 
-    enum PlacesTypes: Int {
+    enum PlacesTypes: Int, Codable {
         case GenericPlace
         case TouristicPlace
+    }
+    
+    //Enum per al JSON
+    enum CodingKeys: String, CodingKey {
+        case id
+        case description
+        case name
+        case type
+        case latitude
+        case longitude
     }
     
     var id: String = ""
@@ -46,11 +56,54 @@ class Place {
         self.description = description
         self.image = image_in
     }
+    
+    //enconding i decoding per al JSON
+    func encode(to encoder: Encoder) throws {
+        
+        var container = encoder.container(keyedBy:CodingKeys.self)
+        
+        try container.encode(id, forKey: .id)
+        try container.encode(type, forKey: .type)
+        try container.encode(name, forKey: .name)
+        try container.encode(description, forKey: .description)
+        
+        // Para la location, grabamos sus componentes latitud y
+        //longitud por separado.
+        try container.encode(location.latitude, forKey:.latitude)
+        try container.encode(location.longitude, forKey:.longitude)
+    }
+    
+    func decode(from decoder: Decoder) throws
+    {
+        let container = try decoder.container(keyedBy:CodingKeys.self)
+        
+        id = try container.decode(String.self, forKey: .id)
+        type = try container.decode(PlacesTypes.self, forKey: .type)
+        name = try container.decode(String.self, forKey: .name)
+        description = try container.decode(String.self, forKey:.description)
+        
+        let latitude = try container.decode(Double.self, forKey:.latitude)
+        let longitude = try container.decode(Double.self, forKey:.longitude)
+        
+        location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        try decode(from: decoder)
+    }
 }
+
+
 
 class PlaceTourist: Place {
     
     var discount_tourist = ""
+    
+    //Enum per al JSON
+    enum CodingKeysTourist: String, CodingKey {
+        case discount_tourist
+    }
     
     override init()
     {
@@ -64,6 +117,24 @@ class PlaceTourist: Place {
         self.discount_tourist = discount_tourist
     }
     
+     //enconding i decoding per al JSON
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy:
+            CodingKeysTourist.self)
+        try container.encode(discount_tourist, forKey:
+            .discount_tourist)
+        try super.encode(to: encoder)
+    }
+
+    override func decode(from decoder: Decoder) throws
+    {
+        try super.decode(from:decoder)
+        let container = try decoder.container(keyedBy:CodingKeysTourist.self)
+        discount_tourist = try container.decode(String.self, forKey:.discount_tourist)
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        self.init()
+        try decode(from:decoder)
+    }
 }
-
-

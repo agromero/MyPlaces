@@ -18,6 +18,7 @@
 		05A40EEC21543C63005FE52C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05A40EEA21543C63005FE52C /* LaunchScreen.storyboard */; };
 		05A40EF6215442C9005FE52C /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A40EF5215442C9005FE52C /* DetailController.swift */; };
 		05A40EF921544460005FE52C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A40EF821544460005FE52C /* MapKit.framework */; };
+		05EAADD1217DB32C00D3E49F /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EAADD0217DB32C00D3E49F /* FileSystem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		05A40EED21543C63005FE52C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A40EF5215442C9005FE52C /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		05A40EF821544460005FE52C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		05EAADD0217DB32C00D3E49F /* FileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,14 +73,15 @@
 				05A40EDF21543C63005FE52C /* AppDelegate.swift */,
 				05A40EE121543C63005FE52C /* FirstViewController.swift */,
 				05A40EE321543C63005FE52C /* SecondViewController.swift */,
-				05A40EE521543C63005FE52C /* Main.storyboard */,
 				05A40EF5215442C9005FE52C /* DetailController.swift */,
+				05A40EE521543C63005FE52C /* Main.storyboard */,
 				052021EE215A244200532345 /* Place.swift */,
 				05A40EE821543C63005FE52C /* Assets.xcassets */,
 				05A40EEA21543C63005FE52C /* LaunchScreen.storyboard */,
 				05A40EED21543C63005FE52C /* Info.plist */,
 				0541DD312177709800424000 /* ManagerLocation.swift */,
 				052D3A19215A3CB10058F01B /* ManagerPlaces.swift */,
+				05EAADD0217DB32C00D3E49F /* FileSystem.swift */,
 			);
 			path = MyPlaces;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05EAADD1217DB32C00D3E49F /* FileSystem.swift in Sources */,
 				05A40EE421543C63005FE52C /* SecondViewController.swift in Sources */,
 				052D3A1A215A3CB10058F01B /* ManagerPlaces.swift in Sources */,
 				05A40EE021543C63005FE52C /* AppDelegate.swift in Sources */,

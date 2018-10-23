@@ -14,7 +14,7 @@ class ManagerLocation
 {
     
     static var pos:Int = 0
-    static var locations:[CLLocationCoordinate2D] = [CLLocationCoordinate2D(latitude: 41.387834, longitude: 2.170130),CLLocationCoordinate2D(latitude: 41.387834, longitude: 2.170130),CLLocationCoordinate2D(latitude: 41.391980, longitude: 2.196036)]
+    static var locations:[CLLocationCoordinate2D] = [CLLocationCoordinate2D(latitude: 41.387834, longitude: 2.170130),CLLocationCoordinate2D(latitude: 41.387834, longitude: 2.170130),CLLocationCoordinate2D(latitude: 41.391980, longitude: 2.196036),CLLocationCoordinate2D(latitude: 41.391980, longitude: 2.196036)]
     
     
     static func GetLocation()->CLLocationCoordinate2D
