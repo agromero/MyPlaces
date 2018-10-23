@@ -25,14 +25,17 @@ class ManagerPlaces : Codable {
  
     //******************************************
     // Singleton
-    static var shared = ManagerPlaces()
-    
-    /*
-    static var sharedManagerPlaces: ManagerPlaces = {
+    //old Singleton
+    //
+    //static var shared = ManagerPlaces
+    //
+ 
+    private static var sharedManagerPlaces: ManagerPlaces = {
+
+        var singletonManager: ManagerPlaces?
         
-        var singletonManager:ManagerPlaces?
         singletonManager = load()
-        if (singletonManager == nil) {
+        if (singletonManager == nil){
             singletonManager = ManagerPlaces()
         }
         return singletonManager!
@@ -40,7 +43,8 @@ class ManagerPlaces : Codable {
 
     class func shared() -> ManagerPlaces {
         return sharedManagerPlaces
-    }*/
+     }
+    
     // ****************************************
     
     //******************************

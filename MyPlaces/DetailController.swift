@@ -88,7 +88,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
 
     @IBAction func Update(_ sender: Any) {
         
-        let manager = ManagerPlaces.shared
+        let manager: ManagerPlaces = ManagerPlaces.shared()
 
         place?.location = ManagerLocation.GetLocation()
 
@@ -110,7 +110,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     
 
     @IBAction func Delete(_ sender: Any) {
-        let manager: ManagerPlaces = ManagerPlaces.shared
+        let manager: ManagerPlaces = ManagerPlaces.shared()
 
         manager.remove(place!)
         manager.UpdateObservers()

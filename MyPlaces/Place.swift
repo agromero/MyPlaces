@@ -57,7 +57,7 @@ class Place : Codable {
         self.image = image_in
     }
     
-    //enconding i decoding per al JSON
+    //enconding i decoding de la classe Place per al JSON
     func encode(to encoder: Encoder) throws {
         
         var container = encoder.container(keyedBy:CodingKeys.self)
@@ -67,8 +67,6 @@ class Place : Codable {
         try container.encode(name, forKey: .name)
         try container.encode(description, forKey: .description)
         
-        // Para la location, grabamos sus componentes latitud y
-        //longitud por separado.
         try container.encode(location.latitude, forKey:.latitude)
         try container.encode(location.longitude, forKey:.longitude)
     }
@@ -117,12 +115,10 @@ class PlaceTourist: Place {
         self.discount_tourist = discount_tourist
     }
     
-     //enconding i decoding per al JSON
+     //enconding i decoding de la PlaceTourist per al JSON
     override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy:
-            CodingKeysTourist.self)
-        try container.encode(discount_tourist, forKey:
-            .discount_tourist)
+        var container = encoder.container(keyedBy:CodingKeysTourist.self)
+        try container.encode(discount_tourist, forKey:.discount_tourist)
         try super.encode(to: encoder)
     }
 

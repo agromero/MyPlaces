@@ -11,15 +11,14 @@ import UIKit
 
 class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
-    let m_provider = ManagerPlaces.shared
-    
+    let manager: ManagerPlaces = ManagerPlaces.shared()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let view: UITableView = (self.view as? UITableView)!;
         view.delegate = self
         view.dataSource = self
-        let manager = ManagerPlaces.shared
         manager.addObserver(object: self)
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -34,7 +33,7 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         // Número de elmentos del manager
-        return m_provider.GetCount()
+        return manager.GetCount()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -45,7 +44,7 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Detectar pulsación en un elemento.
-        let place: Place = self.m_provider.GetItemAt(position: indexPath.row)
+        let place: Place = self.manager.GetItemAt(position: indexPath.row)
         
         let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
         dc.place = place
@@ -63,21 +62,18 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         
         let celda = UITableViewCell(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: tableView.frame.size.width, height: 100)))
       
-        celda.textLabel?.text = m_provider.GetItemAt(position: indexPath.row).name
-        
-        //No funciona per pintar el subtítol
-        //celda.detailTextLabel?.text =  m_provider.GetItemAt(position: indexPath.row).description
-
+        celda.textLabel?.text = manager.GetItemAt(position: indexPath.row).name
+      
         return celda
         
     }
-   
   
     func onPlacesChange()
     {
         let view: UITableView = (self.view as? UITableView)!;
         view.reloadData()
     }
+    
     //NSDictionary *item = (NSDictionary *)[self.content objectAtIndex:indexPath.row];
     //cell.textLabel.text = [item objectForKey:@"mainTitleKey"];
     //cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
