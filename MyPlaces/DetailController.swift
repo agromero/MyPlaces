@@ -30,6 +30,9 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     let pickerElems1 = ["Generic place", "Touristic place"]
 
     override func viewDidLoad() {
+        
+        let manager: ManagerPlaces = ManagerPlaces.shared()
+
         super.viewDidLoad()
         // Do any additional setup after loading the view.
        
@@ -40,11 +43,17 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         if(place != nil){
             //Quan és un place existent (UPDATE), mostrem:
             //Picker amb el valor sel.lecionat, el nom del place, la imatge i la descripció
-
-            viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: true)
+            btnUpdate.setTitle("Update", for: .normal)
+            btnUpdate.setTitle("Update", for: .highlighted)
+            
+            viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: false)
             textName.text = place!.name
+
             if(place!.image != nil){
+                //Image agafada de memoria
                 imagePicked.image = UIImage(data: place!.image!)
+                //Image agafada del path
+                //imagePicked.image = UIImage(contentsOfFile: manager.GetPathImage(p: place!))
             } else{
                 imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
             }
@@ -53,6 +62,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         else{
             //Es un place Nou (NEW), mostrem els camps a omplir
             btnUpdate.setTitle("New", for: .normal)
+            btnUpdate.setTitle("New", for: .highlighted)
             textName.text = "Enter Title here"
             imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
             textDescription.text = "Enter Description here"
@@ -73,10 +83,6 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func Close(_ sender: Any) {
-        // En principio no se usa, porque hay un Cancel que hace lo mismo
-        dismiss(animated: true, completion: nil)
-    }
 
     @IBAction func SelectImage(_ sender: Any) {
         let imagePicker = UIImagePickerController()
@@ -86,6 +92,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         self.present(imagePicker, animated: true, completion: nil)
     }
 
+    //Comportament del botó Update/New
     @IBAction func Update(_ sender: Any) {
         
         let manager: ManagerPlaces = ManagerPlaces.shared()
@@ -108,7 +115,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         dismiss(animated: true, completion: nil)
      }
     
-
+    //Comportament del botó Delete
     @IBAction func Delete(_ sender: Any) {
         let manager: ManagerPlaces = ManagerPlaces.shared()
 
@@ -116,7 +123,12 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         manager.UpdateObservers()
         dismiss(animated: true, completion: nil)
     }
-     
+    
+    //Comportament del botó Cancel
+    @IBAction func Cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int
      {
      return 1

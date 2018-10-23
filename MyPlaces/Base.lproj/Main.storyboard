@@ -212,7 +212,7 @@
                                                 <rect key="frame" x="280.5" y="595" width="48.5" height="30"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <connections>
-                                                    <action selector="Close:" destination="OPN-dn-l27" eventType="touchDown" id="xhb-Na-vvD"/>
+                                                    <action selector="Cancel:" destination="OPN-dn-l27" eventType="touchDown" id="caT-FM-0Iu"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLA-GC-EB7">

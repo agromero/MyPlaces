@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         manager.append(pl2)
         manager.append(pl3)
         manager.append(pl4)
-    
+        
         return true
     }
 
