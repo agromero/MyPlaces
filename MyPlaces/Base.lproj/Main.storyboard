@@ -168,16 +168,8 @@
                                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EI-fb-0er">
-                                                <rect key="frame" x="308" y="8" width="39" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Close"/>
-                                                <connections>
-                                                    <action selector="Close:" destination="OPN-dn-l27" eventType="touchDown" id="kzE-Cx-V4t"/>
-                                                </connections>
-                                            </button>
                                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" text="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Ss-TZ-3Mt">
-                                                <rect key="frame" x="46" y="133" width="229" height="23"/>
+                                                <rect key="frame" x="46" y="125" width="229" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="textColor" red="0.20291044870319691" green="0.19976052331739122" blue="0.70207253886010368" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="16"/>
@@ -188,7 +180,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             </pickerView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N4w-ZN-azc">
-                                                <rect key="frame" x="46" y="157" width="282" height="162"/>
+                                                <rect key="frame" x="46" y="149" width="282" height="162"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbM-3R-dhy">
@@ -216,7 +208,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLA-GC-EB7">
-                                                <rect key="frame" x="255" y="129" width="74" height="27"/>
+                                                <rect key="frame" x="255" y="310" width="74" height="27"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <state key="normal" title="Select Image"/>
