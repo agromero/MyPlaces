@@ -48,16 +48,19 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             
             viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: false)
             textName.text = place!.name
+            textDescription.text = place!.description
 
-            if(place!.image != nil){
+            imagePicked.image = UIImage(contentsOfFile: manager.GetPathImage(p: place!))
+
+            /*if(place!.image != nil){
                 //Image agafada de memoria
-                imagePicked.image = UIImage(data: place!.image!)
+                //imagePicked.image = UIImage(data: place!.image!)
                 //Image agafada del path
-                //imagePicked.image = UIImage(contentsOfFile: manager.GetPathImage(p: place!))
+               
             } else{
                 imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
-            }
-            textDescription.text = place!.description
+            }*/
+            
         }
         else{
             //Es un place Nou (NEW), mostrem els camps a omplir
@@ -97,8 +100,6 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         
         let manager: ManagerPlaces = ManagerPlaces.shared()
 
-        place?.location = ManagerLocation.GetLocation()
-
         if(place != nil){
             place?.name = textName.text!
             place?.description = textDescription.text!
@@ -108,7 +109,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             let selectedtype = Place.PlacesTypes(rawValue: viewPicker.selectedRow(inComponent: 0))
             let imgdata = imagePicked.image?.jpegData(compressionQuality: 0.75)
             let newplace = Place(type: selectedtype!, name: textName.text!, description: textDescription.text!, image_in: imgdata)
-            
+            newplace.location = ManagerLocation.GetLocation()
             manager.append(newplace)
         }
         

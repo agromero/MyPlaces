@@ -20,7 +20,6 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         view.delegate = self
         view.dataSource = self
         manager.addObserver(object: self)
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,17 +72,6 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         let view: UITableView = (self.view as? UITableView)!;
         view.reloadData()
     }
-    
-    //NSDictionary *item = (NSDictionary *)[self.content objectAtIndex:indexPath.row];
-    //cell.textLabel.text = [item objectForKey:@"mainTitleKey"];
-    //cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
-    //NSString *path = [[NSBundle mainBundle] pathForResource:[item objectForKey:@"imageKey"] ofType:@"png"];
-    //UIImage *theImage = [UIImage imageWithContentsOfFile:path];
-    //cell.imageView.image = theImage;
-    //return cell;
-    
-    ///////////////////
-
     
 }
 
