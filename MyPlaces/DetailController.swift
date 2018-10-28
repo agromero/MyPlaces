@@ -123,9 +123,16 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     //Comportament del botó Delete
     @IBAction func Delete(_ sender: Any) {
         let manager: ManagerPlaces = ManagerPlaces.shared()
-
-        manager.remove(place!)
         
+        
+        
+        if(place != nil){
+                    manager.remove(place!)
+        }
+        else
+        {
+        }
+
         manager.store()
         
         manager.UpdateObservers()

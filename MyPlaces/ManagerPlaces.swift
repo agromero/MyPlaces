@@ -145,7 +145,7 @@ class ManagerPlaces : Codable {
     func store()
     {
         do{
-            let encoder = JSONEncoder()
+	        let encoder = JSONEncoder()
             let data = try encoder.encode(self)
             for place in places {
                 if(place.image != nil){

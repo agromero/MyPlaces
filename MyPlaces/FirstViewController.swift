@@ -52,20 +52,41 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // Devolver la altura de la fila situada en una posición determinada.
-        return 100
+        return 80
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // devolver una instancia de la clase UITableViewCell que pinte la fila
         //seleccionada.
+        let listItemType = ["Generic place", "Touristic place"]
+
+      
+        let celda = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as? PlaceCell
+
+        let item = manager.GetItemAt(position: indexPath.row)
+
+        celda?.placeTitleLabel.text = item.name
+        celda?.placeSubtitleLabel.text = listItemType[item.type.rawValue]
+
         
-        let celda = UITableViewCell(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: tableView.frame.size.width, height: 100)))
-      
-        celda.textLabel?.text = manager.GetItemAt(position: indexPath.row).name
-      
-        return celda
+        celda?.placeImageView.image = UIImage(contentsOfFile: manager.GetPathImage(p:item))
+        
+        /* CODIGO ANTES DE IMPLEMENTAR LA CLASE CELDA PlaceCell
+         let celda = UITableViewCell(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: tableView.frame.size.width, height: 100)))
+         let item = manager.GetItemAt(position: indexPath.row)
+         
+         celda.textLabel?.text = item.name
+         
+         let imageIcon: UIImageView = UIImageView(image: UIImage(contentsOfFile: manager.GetPathImage(p:item)))
+         imageIcon.frame = CGRect(x:0, y:0, width:60, height:45)
+         celda.contentView.addSubview(imageIcon)
+         
+         */
+        
+        return celda!
         
     }
+
   
     func onPlacesChange()
     {
