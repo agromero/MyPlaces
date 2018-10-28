@@ -93,7 +93,6 @@ class Place : Codable {
 }
 
 
-
 class PlaceTourist: Place {
     
     var discount_tourist = ""

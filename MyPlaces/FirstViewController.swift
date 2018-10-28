@@ -77,7 +77,6 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
          let imageIcon: UIImageView = UIImageView(image: UIImage(contentsOfFile: manager.GetPathImage(p:item)))
          imageIcon.frame = CGRect(x:0, y:0, width:60, height:45)
          celda.contentView.addSubview(imageIcon)
-         
          */
         
         return celda!

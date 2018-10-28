@@ -103,18 +103,28 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     @IBAction func Update(_ sender: Any) {
         
         let manager: ManagerPlaces = ManagerPlaces.shared()
-
+        
         if(place != nil){
             place?.name = textName.text!
             place?.description = textDescription.text!
         }
         else
         {
-            let selectedtype = Place.PlacesTypes(rawValue: viewPicker.selectedRow(inComponent: 0))
+            let selectedtype = viewPicker.selectedRow(inComponent: 0)
             let imgdata = imagePicked.image?.jpegData(compressionQuality: 0.75)
-            let newplace = Place(type: selectedtype!, name: textName.text!, description: textDescription.text!, image_in: imgdata)
-            newplace.location = ManagerLocation.GetLocation()
-            manager.append(newplace)
+        
+            if (selectedtype==0){
+                //Generic Place
+                let newplace = Place(name: textName.text!, description: textDescription.text!, image_in: imgdata)
+                newplace.location = ManagerLocation.GetLocation()
+                manager.append(newplace)
+            }
+            else {
+                //Touristic Place
+                let newplace = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: "10?", image_in: imgdata )
+                newplace.location = ManagerLocation.GetLocation()
+                manager.append(newplace)
+            }
         }
         
         manager.store()
