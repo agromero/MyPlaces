@@ -59,7 +59,6 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         // devolver una instancia de la clase UITableViewCell que pinte la fila
         //seleccionada.
         let listItemType = ["Generic place", "Touristic place"]
-
       
         let celda = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as? PlaceCell
 
@@ -67,8 +66,6 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
 
         celda?.placeTitleLabel.text = item.name
         celda?.placeSubtitleLabel.text = listItemType[item.type.rawValue]
-
-        
         celda?.placeImageView.image = UIImage(contentsOfFile: manager.GetPathImage(p:item))
         
         /* CODIGO ANTES DE IMPLEMENTAR LA CLASE CELDA PlaceCell

@@ -306,6 +306,8 @@
                         <viewLayoutGuide key="safeArea" id="qRa-vc-7uE"/>
                     </view>
                     <connections>
+                        <outlet property="btnDelete" destination="sX7-oR-KkS" id="uQA-rC-LV5"/>
+                        <outlet property="btnSelectImage" destination="vLA-GC-EB7" id="p2y-ac-ZRd"/>
                         <outlet property="btnUpdate" destination="WbM-3R-dhy" id="AX6-Er-1XV"/>
                         <outlet property="constraintHeight" destination="AqT-fM-bq1" id="Ha8-WH-Zub"/>
                         <outlet property="imagePicked" destination="N4w-ZN-azc" id="wyo-E3-Hvx"/>

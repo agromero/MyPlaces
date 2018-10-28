@@ -111,8 +111,7 @@ class ManagerPlaces : Codable {
     //enconding i decoding per al JSON
     //
     func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy:
-            CodingKeys.self)
+        var container = encoder.container(keyedBy:CodingKeys.self)
         try container.encode(places, forKey: .places)
     }
 

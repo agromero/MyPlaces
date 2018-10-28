@@ -10,15 +10,18 @@ import UIKit
 
 class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate
 {
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var constraintHeight: NSLayoutConstraint!
+
     @IBOutlet weak var viewPicker: UIPickerView!
     @IBOutlet weak var imagePicked: UIImageView!
     @IBOutlet weak var textName: UITextField!
     @IBOutlet weak var textDescription: UITextView!
-    
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var constraintHeight: NSLayoutConstraint!
-    @IBOutlet weak var btnUpdate: UIButton!
 
+    @IBOutlet weak var btnSelectImage: UIButton!
+    @IBOutlet weak var btnUpdate: UIButton!
+    @IBOutlet weak var btnDelete: UIButton!
+    
     var keyboardHeight:CGFloat!
     var activeField: UIView!
     var lastOffset:CGPoint!
@@ -45,27 +48,28 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             //Picker amb el valor sel.lecionat, el nom del place, la imatge i la descripció
             btnUpdate.setTitle("Update", for: .normal)
             btnUpdate.setTitle("Update", for: .highlighted)
+
+            //Ocultem el botó SelectImage perquè no permetem canviar la imatge
+            btnSelectImage.isHidden = true
             
             viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: false)
             textName.text = place!.name
             textDescription.text = place!.description
-
             imagePicked.image = UIImage(contentsOfFile: manager.GetPathImage(p: place!))
-
-            /*if(place!.image != nil){
-                //Image agafada de memoria
-                //imagePicked.image = UIImage(data: place!.image!)
-                //Image agafada del path
-               
-            } else{
-                imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
-            }*/
             
+            if (imagePicked.image==nil){
+            imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
+            }
+
         }
         else{
             //Es un place Nou (NEW), mostrem els camps a omplir
             btnUpdate.setTitle("New", for: .normal)
             btnUpdate.setTitle("New", for: .highlighted)
+            
+            //Ocultem el botó Delete perquè no hem creat encara el Place
+            btnDelete.isHidden = true
+
             textName.text = "Enter Title here"
             imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
             textDescription.text = "Enter Description here"
@@ -124,13 +128,8 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     @IBAction func Delete(_ sender: Any) {
         let manager: ManagerPlaces = ManagerPlaces.shared()
         
-        
-        
         if(place != nil){
                     manager.remove(place!)
-        }
-        else
-        {
         }
 
         manager.store()
