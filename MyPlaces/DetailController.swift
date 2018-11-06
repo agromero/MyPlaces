@@ -105,6 +105,9 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         let manager: ManagerPlaces = ManagerPlaces.shared()
         
         if(place != nil){
+            
+            //Actualizamos los campos editables permitidos
+            
             place?.name = textName.text!
             place?.description = textDescription.text!
         }
@@ -113,17 +116,19 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             let selectedtype = viewPicker.selectedRow(inComponent: 0)
             let imgdata = imagePicked.image?.jpegData(compressionQuality: 0.75)
         
-            if (selectedtype==0){
+            switch selectedtype {
+            case 0:
                 //Generic Place
                 let newplace = Place(name: textName.text!, description: textDescription.text!, image_in: imgdata)
                 newplace.location = ManagerLocation.GetLocation()
                 manager.append(newplace)
-            }
-            else {
+            case 1:
                 //Touristic Place
                 let newplace = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: "10?", image_in: imgdata )
                 newplace.location = ManagerLocation.GetLocation()
                 manager.append(newplace)
+            default:
+                break
             }
         }
         
