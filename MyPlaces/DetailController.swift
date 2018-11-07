@@ -34,7 +34,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
 
     override func viewDidLoad() {
         
-        let manager: ManagerPlaces = ManagerPlaces.shared()
+        let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -55,7 +55,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             viewPicker.selectRow(place!.type.rawValue, inComponent: 0, animated: false)
             textName.text = place!.name
             textDescription.text = place!.description
-            imagePicked.image = UIImage(contentsOfFile: manager.GetPathImage(p: place!))
+            imagePicked.image = UIImage(contentsOfFile: m_places_manager.GetPathImage(p: place!))
             
             if (imagePicked.image==nil){
             imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
@@ -102,7 +102,8 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     //Comportament del botó Update/New
     @IBAction func Update(_ sender: Any) {
         
-        let manager: ManagerPlaces = ManagerPlaces.shared()
+        let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
+        let m_location_manager: ManagerLocation = ManagerLocation.shared()
         
         if(place != nil){
             
@@ -120,36 +121,38 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             case 0:
                 //Generic Place
                 let newplace = Place(name: textName.text!, description: textDescription.text!, image_in: imgdata)
-                newplace.location = ManagerLocation.GetLocation()
-                manager.append(newplace)
+                //newplace.location = ManagerLocation.GetLocation()
+                newplace.location = m_location_manager.GetLocation()
+                m_places_manager.append(newplace)
             case 1:
                 //Touristic Place
                 let newplace = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: "10?", image_in: imgdata )
-                newplace.location = ManagerLocation.GetLocation()
-                manager.append(newplace)
+                //newplace.location = ManagerLocation.GetLocation()
+                newplace.location = m_location_manager.GetLocation()
+                m_places_manager.append(newplace)
             default:
                 break
             }
         }
         
-        manager.store()
+        m_places_manager.store()
         
-        manager.UpdateObservers()
+        m_places_manager.UpdateObservers()
         
         dismiss(animated: true, completion: nil)
      }
     
     //Comportament del botó Delete
     @IBAction func Delete(_ sender: Any) {
-        let manager: ManagerPlaces = ManagerPlaces.shared()
+        let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
         
         if(place != nil){
-                    manager.remove(place!)
+                    m_places_manager.remove(place!)
         }
 
-        manager.store()
+        m_places_manager.store()
         
-        manager.UpdateObservers()
+        m_places_manager.UpdateObservers()
         
         dismiss(animated: true, completion: nil)
     }

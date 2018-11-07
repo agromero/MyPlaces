@@ -25,10 +25,6 @@ class ManagerPlaces : Codable {
  
     //******************************************
     // Singleton
-    //old Singleton
-    //
-    //static var shared = ManagerPlaces
-    //
  
     private static var sharedManagerPlaces: ManagerPlaces = {
 

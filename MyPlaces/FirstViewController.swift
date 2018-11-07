@@ -11,7 +11,8 @@ import UIKit
 
 class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
-    let manager: ManagerPlaces = ManagerPlaces.shared()
+    let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
+    let m_location_manager: ManagerLocation = ManagerLocation.shared()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,7 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         let view: UITableView = (self.view as? UITableView)!;
         view.delegate = self
         view.dataSource = self
-        manager.addObserver(object: self)
+        m_places_manager.addObserver(object: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +33,7 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         // Número de elmentos del manager
-        return manager.GetCount()
+        return m_places_manager.GetCount()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,7 +44,7 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Detectar pulsación en un elemento.
-        let place: Place = self.manager.GetItemAt(position: indexPath.row)
+        let place: Place = self.m_places_manager.GetItemAt(position: indexPath.row)
         
         let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
         dc.place = place
@@ -62,19 +63,19 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
       
         let celda = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as? PlaceCell
 
-        let item = manager.GetItemAt(position: indexPath.row)
+        let item = m_places_manager.GetItemAt(position: indexPath.row)
 
         celda?.placeTitleLabel.text = item.name
         celda?.placeSubtitleLabel.text = listItemType[item.type.rawValue]
-        celda?.placeImageView.image = UIImage(contentsOfFile: manager.GetPathImage(p:item))
+        celda?.placeImageView.image = UIImage(contentsOfFile: m_places_manager.GetPathImage(p:item))
         
         /* CODIGO ANTES DE IMPLEMENTAR LA CLASE CELDA PlaceCell
          let celda = UITableViewCell(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: tableView.frame.size.width, height: 100)))
-         let item = manager.GetItemAt(position: indexPath.row)
+         let item = m_places_manager.GetItemAt(position: indexPath.row)
          
          celda.textLabel?.text = item.name
          
-         let imageIcon: UIImageView = UIImageView(image: UIImage(contentsOfFile: manager.GetPathImage(p:item)))
+         let imageIcon: UIImageView = UIImageView(image: UIImage(contentsOfFile: m_places_manager.GetPathImage(p:item)))
          imageIcon.frame = CGRect(x:0, y:0, width:60, height:45)
          celda.contentView.addSubview(imageIcon)
          */
