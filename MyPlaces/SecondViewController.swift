@@ -7,19 +7,107 @@
 //
 
 import UIKit
+import MapKit
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesObserver {
 
+    @IBOutlet weak var m_map: MKMapView!
+    
+    let m_location_manager: ManagerLocation = ManagerLocation.shared()
+    let m_places_manager:ManagerPlaces = ManagerPlaces.shared()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        self.m_map.delegate = self
+        m_places_manager.addObserver(object: self)
+
+        AddMarkers()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
+    
+    func RemoveMarkers()
+    {
+        let lista = self.m_map.annotations.filter { !($0 is MKUserLocation) }
+        self.m_map.removeAnnotations(lista)
+    }
+
+    
+    func AddMarkers()
+    {
+       
+        for i in 0..<m_places_manager.GetCount() {
+            let item = m_places_manager.GetItemAt(position: i)
+            
+            let title:String = item.name
+            let id:String = item.id
+            let lat:Double = item.location.latitude
+            let lon:Double = item.location.longitude
+            
+            let annotation:MKMyPointAnnotation = MKMyPointAnnotation(coordinate:
+                CLLocationCoordinate2D(latitude: lat,longitude: lon),title: title,place_id: id)
+            
+            self.m_map.addAnnotation(annotation)
+        }
+        
+    }
+
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
+    {
+        if let annotation = annotation as? MKMyPointAnnotation
+        {
+            
+            let identifier = "CustomPinAnnotationView"
+            var pinView: MKPinAnnotationView
+            if let dequeuedView =
+                self.m_map?.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
+                dequeuedView.annotation = annotation
+                pinView = dequeuedView
+            } else {
+                
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                pinView.canShowCallout = true
+                
+                pinView.calloutOffset = CGPoint(x: -5, y: 5)
+                pinView.rightCalloutAccessoryView = UIButton(type:.detailDisclosure) as UIView
+                
+                pinView.setSelected(true,animated: true)
+            }
+            return pinView
+        }
+        return nil
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, annotationView: MKAnnotationView,
+                 calloutAccessoryControlTapped control: UIControl) {
+        
+        let annotation:MKMyPointAnnotation = annotationView.annotation as! MKMyPointAnnotation
+        
+        // Mostrar el DetailController de ese Place
+
+        let place = m_places_manager.GetItemById(id: annotation.place_id)
+
+        let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+        dc.place = place
+        
+        present(dc, animated: true, completion: nil)
+
+        }
+
+    
+    func onPlacesChange()
+    {
+        self.RemoveMarkers()
+        self.AddMarkers()
+    }
 
 }
 
