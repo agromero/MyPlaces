@@ -15,15 +15,16 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     
     let m_location_manager: ManagerLocation = ManagerLocation.shared()
     let m_places_manager:ManagerPlaces = ManagerPlaces.shared()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.m_map.mapType = MKMapType.standard
         self.m_map.delegate = self
         m_places_manager.addObserver(object: self)
 
         AddMarkers()
+        
     }
 
     
@@ -41,7 +42,6 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     
     func AddMarkers()
     {
-       
         for i in 0..<m_places_manager.GetCount() {
             let item = m_places_manager.GetItemAt(position: i)
             
@@ -56,6 +56,16 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
             self.m_map.addAnnotation(annotation)
         }
         
+            //Add my position
+            let title:String = "Me"
+            let id:String = "0000"
+            let lat:Double = self.m_location_manager.GetLocation().latitude
+            let lon:Double = self.m_location_manager.GetLocation().longitude
+            
+            let annotation:MKMyPointAnnotation = MKMyPointAnnotation(coordinate:
+                CLLocationCoordinate2D(latitude: lat,longitude: lon),title: title,place_id: id)
+            
+            self.m_map.addAnnotation(annotation)
     }
 
     
@@ -77,14 +87,16 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
                 
                 pinView.calloutOffset = CGPoint(x: -5, y: 5)
                 pinView.rightCalloutAccessoryView = UIButton(type:.detailDisclosure) as UIView
-                
+                if annotation.place_id=="0000"{
+                    pinView.pinTintColor = UIColor.blue
+                }
                 pinView.setSelected(true,animated: true)
             }
             return pinView
         }
         return nil
     }
-    
+
     
     func mapView(_ mapView: MKMapView, annotationView: MKAnnotationView,
                  calloutAccessoryControlTapped control: UIControl) {
@@ -93,7 +105,19 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         
         // Mostrar el DetailController de ese Place
 
-        let place = m_places_manager.GetItemById(id: annotation.place_id)
+        let place = m_places_manager.GetItemById(id: annotation.place_id)        
+        /*
+         let current_lat = self.m_location_manager.GetLocation().latitude
+         let current_long = self.m_location_manager.GetLocation().longitude
+         let current_loc:CLLocation  = CLLocation(latitude: current_lat , longitude: current_long)
+         
+         let place_loc:CLLocation = CLLocation(latitude: annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
+         
+         let distance:CLLocationDistance = (current_loc.distance(from: place_loc))
+         
+        let string1:String = "To:\(String(describing: annotation.title)) a float:\(distance)"
+         */
+        
 
         let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
         dc.place = place

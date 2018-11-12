@@ -269,6 +269,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }
 
@@ -281,3 +282,5 @@ fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [U
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
 }
+
+

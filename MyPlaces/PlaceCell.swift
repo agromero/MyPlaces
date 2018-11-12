@@ -13,5 +13,6 @@ class PlaceCell: UITableViewCell {
     @IBOutlet weak var placeImageView: UIImageView!
     @IBOutlet weak var placeTitleLabel: UILabel!
     @IBOutlet weak var placeSubtitleLabel: UILabel!
+
     
 }

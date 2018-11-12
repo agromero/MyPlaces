@@ -80,12 +80,12 @@
 				05A40EE321543C63005FE52C /* SecondViewController.swift */,
 				0541DD312177709800424000 /* ManagerLocation.swift */,
 				052D3A19215A3CB10058F01B /* ManagerPlaces.swift */,
+				99B342DB21933F3D0017A3CB /* MKMyPointAnnotation.swift */,
 				05A40EF5215442C9005FE52C /* DetailController.swift */,
 				0547EC0C21837388003FD28F /* PlaceCell.swift */,
 				052021EE215A244200532345 /* Place.swift */,
 				05A40EE521543C63005FE52C /* Main.storyboard */,
 				05A40EE821543C63005FE52C /* Assets.xcassets */,
-				99B342DB21933F3D0017A3CB /* MKMyPointAnnotation.swift */,
 				05A40EEA21543C63005FE52C /* LaunchScreen.storyboard */,
 				05A40EED21543C63005FE52C /* Info.plist */,
 			);

@@ -23,6 +23,4 @@ class MKMyPointAnnotation: NSObject,MKAnnotation
         self.title = title
         self.place_id = place_id
     }
-  
-    
 }
