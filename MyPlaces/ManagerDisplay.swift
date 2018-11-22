@@ -28,7 +28,7 @@ class ManagerDisplay : Codable {
 
         return sharedManagerDisplay
     }
-
+/*
     func ApplyRecursiveBackground(v:UIView)
     {
         let darkGreenColor = UIColor(red: 0/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1.0)
@@ -53,7 +53,42 @@ class ManagerDisplay : Codable {
         }
         
     }
+*/
+    
+    func ApplyRecursiveBackground(v:UIView)
+    {
+        let darkGreenColor = UIColor(red: 0/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1.0)
+        
+        //v.backgroundColor = UIColor(patternImage: UIImage(named: "carbon.jpg")!)
+        v.backgroundColor = darkGreenColor
+        
+        for subview in v.subviews {
+            
+            ApplyRecursiveBackground(v:subview)
+        }
+        
+    }
+    
+    
+    func ApplyRecursiveButtonStyle(v:UIView)
+    {
+        let darkGreenColor2 = UIColor(red: 0/255.0, green: 60/255.0, blue: 0/255.0, alpha: 1.0)
+        
+        for subview in v.subviews {
+            
+            if((subview as? UIButton) != nil)
+            {
+                subview.backgroundColor = darkGreenColor2
+                subview.layer.cornerRadius = subview.frame.height / 2
+                
+                subview.tintColor = UIColor.white
+            }
+            ApplyRecursiveButtonStyle(v:subview)
+        }
+        
+    }
 
+    
     func ApplyBackground(v:UIView){
         //Fondo de la vista
         let darkGreenColor = UIColor(red: 0/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1.0)
@@ -92,3 +127,5 @@ class ManagerDisplay : Codable {
         cell.selectedBackgroundView? = view
     }
 }
+
+

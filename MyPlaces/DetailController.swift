@@ -44,6 +44,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
 
         m_display_manager.ApplyRecursiveBackground(v: self.view)
         m_display_manager.ApplyNavigationBarStyle(vc: self)
+        m_display_manager.ApplyRecursiveButtonStyle(v: self.view)
 
         //Sempre mostrem el Picker
         viewPicker.delegate = self
