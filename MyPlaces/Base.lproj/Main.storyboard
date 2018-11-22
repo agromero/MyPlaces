@@ -95,7 +95,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Places" id="iXj-tA-OSV">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eaN-85-rAf">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="pinplus3wc" id="eaN-85-rAf">
                             <connections>
                                 <segue destination="OPN-dn-l27" kind="showDetail" id="ngR-ci-aUJ"/>
                             </connections>
@@ -316,6 +316,7 @@
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
+        <image name="pinplus3wc" width="64" height="61"/>
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>

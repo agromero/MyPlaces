@@ -31,8 +31,13 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
 
     // Places types
     let pickerElems1 = ["Generic place", "Touristic place"]
+    let aplicaDisseny = 0 // 0 = Sense Disseny // 1 = Amb Disseny
 
     override func viewDidLoad() {
+        
+            if aplicaDisseny==1{
+                self.ApplyViewDesign()
+            }
         
         let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
 
@@ -261,17 +266,23 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         }
         keyboardHeight = nil
     }
-    
-     /*
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
 
+    private func ApplyViewDesign(){
+        //Vamos a aplicar los cambios de diseño de la Vista desde el código
+        
+        let darkGreenColor = UIColor(red: 0/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1.0)
+        
+        //Diseño Botón Update
+        
+        btnUpdate.backgroundColor = UIColor.clear
+        btnUpdate.layer.borderWidth = 2
+        btnUpdate.layer.borderColor = darkGreenColor.cgColor
+    }
+    
 }
+
+
+
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {

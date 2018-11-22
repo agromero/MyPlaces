@@ -12,15 +12,22 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
     let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
     let m_location_manager: ManagerLocation = ManagerLocation.shared()
+    let aplicaDisseny = 0 // 0 = Sense Disseny // 1 = Amb Disseny
 
     override func viewDidLoad() {
-        self.ApplyViewDesign()
+
+        if aplicaDisseny==1{
+            self.ApplyViewDesign()
+            self.ApplyBarButton()
+        }
+
         super.viewDidLoad()
         let view: UITableView = (self.view as? UITableView)!;
         view.delegate = self
         view.dataSource = self
         m_places_manager.addObserver(object: self)
     }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,13 +77,45 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         celda?.placeSubtitleLabel.text = listItemType[item.type.rawValue]
         celda?.placeImageView.image = UIImage(contentsOfFile: m_places_manager.GetPathImage(p:item))
         
-        ApplyCellDesign(cell: celda!)
+        if (aplicaDisseny==1){
+            ApplyCellDesign(cell: celda!)
+        }
         
         return celda!
         
     }
 
-  
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCell.EditingStyle.delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            
+            let item = m_places_manager.GetItemAt(position: indexPath.row)
+            m_places_manager.remove(item)
+            
+            m_places_manager.store()
+            m_places_manager.UpdateObservers()
+            }
+    }
+/*
+    override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            print("Delete button tapped")
+        }
+        delete.backgroundColor = .red
+        
+        let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
+            print("Edit button tapped")
+        }
+        edit.backgroundColor = .lightGray
+        
+        return [delete, edit] //Buttons will appear in reverse order
+    }
+ */
     func onPlacesChange()
     {
         let view: UITableView = (self.view as? UITableView)!;
@@ -84,7 +123,7 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     }
     
     
-    private func ApplyViewDesign(){
+    func ApplyViewDesign(){
         //Vamos a aplicar los cambios de diseño de la Vista desde el código
         
         let darkGreenColor = UIColor(red: 0/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1.0)
@@ -96,16 +135,18 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
         self.navigationController?.navigationBar.tintColor = .white
-        
-        self.tableView.dequeueReusableCell(withIdentifier: "PlaceCell")?.contentView.backgroundColor = .red
-        
     }
     
     private func ApplyCellDesign(cell: PlaceCell) -> UITableViewCell{
         //Vamos a aplicar los cambios de diseño de la celda desde el código
-        
+
         //Color Fondo de la celda
         cell.contentView.backgroundColor = UIColor(red: 0/255.0, green: 40/255.0, blue: 0/255.0, alpha: 1.0)
+        
+        //Borde del thumbnail
+        cell.placeImageView.layer.borderWidth = 2
+        cell.placeImageView.layer.borderColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0).cgColor
+        cell.placeImageView.layer.cornerRadius = 5.0
         
         //Colores del texto
         cell.placeTitleLabel.textColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
@@ -117,6 +158,12 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         cell.selectedBackgroundView? = view
         
         return cell
+    }
+    
+    private func ApplyBarButton(){
+        let img = UIImage(named: "pinplus1")!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        let rightBarButtonItem = UIBarButtonItem(image: img, style: UIBarButtonItem.Style.plain, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 }
 

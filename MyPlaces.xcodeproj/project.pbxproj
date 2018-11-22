@@ -15,7 +15,7 @@
 		05A40EE221543C63005FE52C /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A40EE121543C63005FE52C /* FirstViewController.swift */; };
 		05A40EE421543C63005FE52C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A40EE321543C63005FE52C /* SecondViewController.swift */; };
 		05A40EE721543C63005FE52C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05A40EE521543C63005FE52C /* Main.storyboard */; };
-		05A40EE921543C63005FE52C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A40EE821543C63005FE52C /* Assets.xcassets */; };
+		05A40EE921543C63005FE52C /* 	.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05A40EE821543C63005FE52C /* 	.xcassets */; };
 		05A40EEC21543C63005FE52C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05A40EEA21543C63005FE52C /* LaunchScreen.storyboard */; };
 		05A40EF6215442C9005FE52C /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A40EF5215442C9005FE52C /* DetailController.swift */; };
 		05A40EF921544460005FE52C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A40EF821544460005FE52C /* MapKit.framework */; };
@@ -33,7 +33,7 @@
 		05A40EE121543C63005FE52C /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		05A40EE321543C63005FE52C /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		05A40EE621543C63005FE52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		05A40EE821543C63005FE52C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		05A40EE821543C63005FE52C /* 	.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "\t.xcassets"; sourceTree = "<group>"; };
 		05A40EEB21543C63005FE52C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05A40EED21543C63005FE52C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05A40EF5215442C9005FE52C /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
@@ -78,14 +78,14 @@
 				05EAADD0217DB32C00D3E49F /* FileSystem.swift */,
 				05A40EE121543C63005FE52C /* FirstViewController.swift */,
 				05A40EE321543C63005FE52C /* SecondViewController.swift */,
-				0541DD312177709800424000 /* ManagerLocation.swift */,
-				052D3A19215A3CB10058F01B /* ManagerPlaces.swift */,
-				99B342DB21933F3D0017A3CB /* MKMyPointAnnotation.swift */,
 				05A40EF5215442C9005FE52C /* DetailController.swift */,
-				0547EC0C21837388003FD28F /* PlaceCell.swift */,
 				052021EE215A244200532345 /* Place.swift */,
+				052D3A19215A3CB10058F01B /* ManagerPlaces.swift */,
+				0547EC0C21837388003FD28F /* PlaceCell.swift */,
+				0541DD312177709800424000 /* ManagerLocation.swift */,
+				99B342DB21933F3D0017A3CB /* MKMyPointAnnotation.swift */,
 				05A40EE521543C63005FE52C /* Main.storyboard */,
-				05A40EE821543C63005FE52C /* Assets.xcassets */,
+				05A40EE821543C63005FE52C /* 	.xcassets */,
 				05A40EEA21543C63005FE52C /* LaunchScreen.storyboard */,
 				05A40EED21543C63005FE52C /* Info.plist */,
 			);
@@ -168,7 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05A40EEC21543C63005FE52C /* LaunchScreen.storyboard in Resources */,
-				05A40EE921543C63005FE52C /* Assets.xcassets in Resources */,
+				05A40EE921543C63005FE52C /* 	.xcassets in Resources */,
 				05A40EE721543C63005FE52C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
