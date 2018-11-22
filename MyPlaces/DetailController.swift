@@ -32,18 +32,19 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     // Places types
     let pickerElems1 = ["Generic place", "Touristic place"]
     let aplicaDisseny = 0 // 0 = Sense Disseny // 1 = Amb Disseny
-
+    
     override func viewDidLoad() {
         
-            if aplicaDisseny==1{
-                self.ApplyViewDesign()
-            }
         
         let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
+        let m_display_manager: ManagerDisplay = ManagerDisplay.shared()
 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-       
+
+        m_display_manager.ApplyRecursiveBackground(v: self.view)
+        m_display_manager.ApplyNavigationBarStyle(vc: self)
+
         //Sempre mostrem el Picker
         viewPicker.delegate = self
         viewPicker.dataSource = self
@@ -267,7 +268,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         keyboardHeight = nil
     }
 
-    private func ApplyViewDesign(){
+    private func ApplyButtonDesign(){
         //Vamos a aplicar los cambios de diseño de la Vista desde el código
         
         let darkGreenColor = UIColor(red: 0/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1.0)
@@ -280,8 +281,6 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     }
     
 }
-
-
 
 
 // Helper function inserted by Swift 4.2 migrator.

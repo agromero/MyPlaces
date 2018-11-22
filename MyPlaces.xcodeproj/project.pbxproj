@@ -21,6 +21,7 @@
 		05A40EF921544460005FE52C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A40EF821544460005FE52C /* MapKit.framework */; };
 		05EAADD1217DB32C00D3E49F /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EAADD0217DB32C00D3E49F /* FileSystem.swift */; };
 		99B342DC21933F3D0017A3CB /* MKMyPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B342DB21933F3D0017A3CB /* MKMyPointAnnotation.swift */; };
+		99E45B8B21A6BCEB00DEF4E7 /* ManagerDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E45B8A21A6BCEB00DEF4E7 /* ManagerDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		05A40EF821544460005FE52C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		05EAADD0217DB32C00D3E49F /* FileSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
 		99B342DB21933F3D0017A3CB /* MKMyPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMyPointAnnotation.swift; sourceTree = "<group>"; };
+		99E45B8A21A6BCEB00DEF4E7 /* ManagerDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDisplay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,14 +81,15 @@
 				05A40EE121543C63005FE52C /* FirstViewController.swift */,
 				05A40EE321543C63005FE52C /* SecondViewController.swift */,
 				05A40EF5215442C9005FE52C /* DetailController.swift */,
+				0547EC0C21837388003FD28F /* PlaceCell.swift */,
 				052021EE215A244200532345 /* Place.swift */,
 				052D3A19215A3CB10058F01B /* ManagerPlaces.swift */,
-				0547EC0C21837388003FD28F /* PlaceCell.swift */,
 				0541DD312177709800424000 /* ManagerLocation.swift */,
+				99E45B8A21A6BCEB00DEF4E7 /* ManagerDisplay.swift */,
 				99B342DB21933F3D0017A3CB /* MKMyPointAnnotation.swift */,
 				05A40EE521543C63005FE52C /* Main.storyboard */,
-				05A40EE821543C63005FE52C /* 	.xcassets */,
 				05A40EEA21543C63005FE52C /* LaunchScreen.storyboard */,
+				05A40EE821543C63005FE52C /* 	.xcassets */,
 				05A40EED21543C63005FE52C /* Info.plist */,
 			);
 			path = MyPlaces;
@@ -185,6 +188,7 @@
 				05A40EE421543C63005FE52C /* SecondViewController.swift in Sources */,
 				052D3A1A215A3CB10058F01B /* ManagerPlaces.swift in Sources */,
 				05A40EE021543C63005FE52C /* AppDelegate.swift in Sources */,
+				99E45B8B21A6BCEB00DEF4E7 /* ManagerDisplay.swift in Sources */,
 				0541DD322177709800424000 /* ManagerLocation.swift in Sources */,
 				05A40EF6215442C9005FE52C /* DetailController.swift in Sources */,
 				05A40EE221543C63005FE52C /* FirstViewController.swift in Sources */,

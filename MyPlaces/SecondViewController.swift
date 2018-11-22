@@ -15,9 +15,14 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     
     let m_location_manager: ManagerLocation = ManagerLocation.shared()
     let m_places_manager:ManagerPlaces = ManagerPlaces.shared()
+    let m_display_manager : ManagerDisplay = ManagerDisplay.shared()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        m_display_manager.ApplyBackground(v: self.view)
+        m_display_manager.ApplyNavigationBarStyle(vc: self)
         
         self.m_map.mapType = MKMapType.standard
         self.m_map.delegate = self

@@ -25,22 +25,31 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="is loading..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CuL-D4-SdC">
-                                <rect key="frame" x="137" y="189" width="129" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="is loading..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CuL-D4-SdC">
+                                <rect key="frame" x="137" y="193" width="129" height="27"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="My Places" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jJx-9V-ZQH">
-                                <rect key="frame" x="96" y="142" width="211" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="MyPlaces" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jJx-9V-ZQH">
+                                <rect key="frame" x="96" y="142" width="211" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="211" id="bCJ-CZ-apD"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jJx-9V-ZQH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="CEz-6H-obn"/>
+                            <constraint firstItem="CuL-D4-SdC" firstAttribute="top" secondItem="jJx-9V-ZQH" secondAttribute="bottom" constant="8" id="OmY-NT-9MA"/>
+                            <constraint firstItem="CuL-D4-SdC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="137" id="X9d-T5-sCd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jJx-9V-ZQH" secondAttribute="trailing" constant="68" id="evR-ky-8Cd"/>
+                            <constraint firstItem="jJx-9V-ZQH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="122" id="kZs-pC-xWf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CuL-D4-SdC" secondAttribute="trailing" constant="109" id="rKH-oD-i3N"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

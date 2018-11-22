@@ -12,16 +12,17 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
     let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
     let m_location_manager: ManagerLocation = ManagerLocation.shared()
+    let m_display_manager : ManagerDisplay = ManagerDisplay.shared()
+    
     let aplicaDisseny = 0 // 0 = Sense Disseny // 1 = Amb Disseny
 
     override func viewDidLoad() {
-
-        if aplicaDisseny==1{
-            self.ApplyViewDesign()
-            self.ApplyBarButton()
-        }
-
+        
         super.viewDidLoad()
+        
+        m_display_manager.ApplyBackground(v: self.view)
+        m_display_manager.ApplyNavigationBarStyle(vc: self)
+        
         let view: UITableView = (self.view as? UITableView)!;
         view.delegate = self
         view.dataSource = self
@@ -77,9 +78,9 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
         celda?.placeSubtitleLabel.text = listItemType[item.type.rawValue]
         celda?.placeImageView.image = UIImage(contentsOfFile: m_places_manager.GetPathImage(p:item))
         
-        if (aplicaDisseny==1){
-            ApplyCellDesign(cell: celda!)
-        }
+        //El diseño de celda se utiliza unicamente en esta vista
+        //pero está definido en la clase ManagerDisplay para unificar los temas de diseño
+        m_display_manager.ApplyCellDesign(cell: celda!)
         
         return celda!
         
@@ -88,82 +89,36 @@ class FirstViewController: UITableViewController, ManagerPlacesObserver {
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCell.EditingStyle.delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
-            
-            let item = m_places_manager.GetItemAt(position: indexPath.row)
-            m_places_manager.remove(item)
-            
-            m_places_manager.store()
-            m_places_manager.UpdateObservers()
-            }
-    }
-/*
-    override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
 
-        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
-            print("Delete button tapped")
-        }
-        delete.backgroundColor = .red
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let item = self.m_places_manager.GetItemAt(position: indexPath.row)
         
-        let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
-            print("Edit button tapped")
+        let deleteButton = UITableViewRowAction(style: .default, title: "DELETE") { (action, indexPath) in
+            
+            self.m_places_manager.remove(item)
+            
+            self.m_places_manager.store()
+            self.m_places_manager.UpdateObservers()
         }
-        edit.backgroundColor = .lightGray
-        
-        return [delete, edit] //Buttons will appear in reverse order
+        deleteButton.backgroundColor = .red
+
+        //Este boton Edit lo ponemos para mostrar como añadir más opciones en el swipe
+        let editButton = UITableViewRowAction(style: .default, title: "EDIT") { (action, indexPath) in
+            
+            let dc:DetailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailController") as! DetailController
+            dc.place = item
+            self.present(dc, animated: true, completion: nil)
+        }
+        editButton.backgroundColor = .lightGray
+
+        return [deleteButton, editButton] //Los botones se devuelven a la inversa de como se muestran
     }
- */
+
     func onPlacesChange()
     {
         let view: UITableView = (self.view as? UITableView)!;
         view.reloadData()
     }
-    
-    
-    func ApplyViewDesign(){
-        //Vamos a aplicar los cambios de diseño de la Vista desde el código
-        
-        let darkGreenColor = UIColor(red: 0/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1.0)
-        
-        //Fondo de la vista
-        view.backgroundColor = darkGreenColor
-        
-        //Barra de navegación
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-        self.navigationController?.navigationBar.tintColor = .white
-    }
-    
-    private func ApplyCellDesign(cell: PlaceCell) -> UITableViewCell{
-        //Vamos a aplicar los cambios de diseño de la celda desde el código
 
-        //Color Fondo de la celda
-        cell.contentView.backgroundColor = UIColor(red: 0/255.0, green: 40/255.0, blue: 0/255.0, alpha: 1.0)
-        
-        //Borde del thumbnail
-        cell.placeImageView.layer.borderWidth = 2
-        cell.placeImageView.layer.borderColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0).cgColor
-        cell.placeImageView.layer.cornerRadius = 5.0
-        
-        //Colores del texto
-        cell.placeTitleLabel.textColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
-        cell.placeSubtitleLabel.textColor = UIColor(red: 150/255.0, green: 150/255.0, blue: 150/255.0, alpha: 1.0)
-        
-        //Color al mantener pulsado
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0/255.0, green: 60/255.0, blue: 0/255.0, alpha: 1.0)
-        cell.selectedBackgroundView? = view
-        
-        return cell
-    }
-    
-    private func ApplyBarButton(){
-        let img = UIImage(named: "pinplus1")!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        let rightBarButtonItem = UIBarButtonItem(image: img, style: UIBarButtonItem.Style.plain, target: self, action: nil)
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
-    }
 }
 
