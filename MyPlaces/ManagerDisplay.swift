@@ -28,32 +28,7 @@ class ManagerDisplay : Codable {
 
         return sharedManagerDisplay
     }
-/*
-    func ApplyRecursiveBackground(v:UIView)
-    {
-        let darkGreenColor = UIColor(red: 0/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1.0)
-        let darkGreenColor2 = UIColor(red: 0/255.0, green: 60/255.0, blue: 0/255.0, alpha: 1.0)
 
-        //v.backgroundColor = UIColor(patternImage: UIImage(named: "carbon.jpg")!)
-        v.backgroundColor = darkGreenColor
-        
-        for subview in v.subviews {
-            
-            if((subview as? UIButton) != nil)
-            {
-                subview.backgroundColor = darkGreenColor2
-                subview.layer.borderWidth = 0
-                subview.layer.borderColor = UIColor.white.cgColor
-                subview.tintColor = .white
-            }
-            else
-            {
-                ApplyRecursiveBackground(v:subview)
-            }
-        }
-        
-    }
-*/
     
     func ApplyRecursiveBackground(v:UIView)
     {
@@ -78,9 +53,9 @@ class ManagerDisplay : Codable {
             
             if((subview as? UIButton) != nil)
             {
-                subview.backgroundColor = darkGreenColor2
                 subview.layer.cornerRadius = subview.frame.height / 2
-                
+                subview.backgroundColor = darkGreenColor2
+                subview.clipsToBounds = true
                 subview.tintColor = UIColor.white
             }
             ApplyRecursiveButtonStyle(v:subview)
@@ -101,12 +76,9 @@ class ManagerDisplay : Codable {
         vc.navigationController?.navigationBar.isTranslucent = true
         vc.navigationController?.navigationBar.barStyle = UIBarStyle.black
         vc.navigationController?.navigationBar.tintColor = .white
-        
-        //Boton Derecho de la Barra de Navegacion
-        let img = UIImage(named: "pinplus1")!.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
-        let rightBarButtonItem = UIBarButtonItem(image: img, style: UIBarButtonItem.Style.plain, target: self, action: nil)
-        vc.navigationItem.rightBarButtonItem = rightBarButtonItem
+        vc.navigationItem.rightBarButtonItem?.image = UIImage(named: "pinplus1")
     }
+
     
     func ApplyCellDesign(cell: PlaceCell) {
         //Color Fondo de la celda
