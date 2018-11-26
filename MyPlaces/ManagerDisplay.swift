@@ -78,7 +78,6 @@ class ManagerDisplay : Codable {
         vc.navigationController?.navigationBar.tintColor = .white
         vc.navigationItem.rightBarButtonItem?.image = UIImage(named: "pinplus1")
     }
-
     
     func ApplyCellDesign(cell: PlaceCell) {
         //Color Fondo de la celda
@@ -98,6 +97,9 @@ class ManagerDisplay : Codable {
         view.backgroundColor = UIColor(red: 0/255.0, green: 60/255.0, blue: 0/255.0, alpha: 1.0)
         cell.selectedBackgroundView? = view
     }
+    
+    func ApplyDetailDesign(v: UIView) {
+    }
+    
+
 }
-
-

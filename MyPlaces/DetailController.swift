@@ -40,16 +40,18 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         let m_display_manager: ManagerDisplay = ManagerDisplay.shared()
 
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
 
+        //Aplicamos los aspectos de diseño
         m_display_manager.ApplyRecursiveBackground(v: self.view)
         m_display_manager.ApplyNavigationBarStyle(vc: self)
         m_display_manager.ApplyRecursiveButtonStyle(v: self.view)
+        m_display_manager.ApplyDetailDesign(v: self.view)
 
         //Sempre mostrem el Picker
         viewPicker.delegate = self
         viewPicker.dataSource = self
-        
+
+       
         if(place != nil){
             //Quan és un place existent (UPDATE), mostrem:
             //Picker amb el valor sel.lecionat, el nom del place, la imatge i la descripció
@@ -63,10 +65,6 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             textName.text = place!.name
             textDescription.text = place!.description
             imagePicked.image = UIImage(contentsOfFile: m_places_manager.GetPathImage(p: place!))
-            
-            if (imagePicked.image==nil){
-            imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
-            }
 
         }
         else{
@@ -76,11 +74,14 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             
             //Ocultem el botó Delete perquè no hem creat encara el Place
             btnDelete.isHidden = true
-
             textName.text = "Enter Title here"
-            imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
             textDescription.text = "Enter Description here"
-       }
+        }
+
+        imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
+        imagePicked.layer.borderColor = UIColor.white.cgColor
+        textName.textColor = UIColor.white
+        textDescription.textColor = UIColor.white
         
         // Soft keyboard Control
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(dismissKeyboard))
@@ -89,10 +90,14 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
         textName.delegate = self
-        textDescription.delegate = self    }
+        textDescription.delegate = self
+        
+    }
 
-        override func didReceiveMemoryWarning() {
+    
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -164,31 +169,51 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         dismiss(animated: true, completion: nil)
     }
     
+    
     //Comportament del botó Cancel
     @IBAction func Cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int
-     {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int{
      return 1
      }
-     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-     {
-     return pickerElems1.count
-     }
-     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
-     {
-     return pickerElems1[row]
-     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
-    {
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+
+        return pickerElems1.count
+     }
+
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        var label: UILabel
+        
+        if let view = view as? UILabel { label = view }
+        else { label = UILabel() }
+        
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Arial", size: 16) // or UIFont.boldSystemFont(ofSize: 20)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
+        
+        label.text = pickerElems1[row] // implemented elsewhere
+        
+        //color  and center the label's background
+        //pickerView.backgroundColor = UIColor.darkGreen
+        pickerView.subviews[1].backgroundColor = UIColor.white // desired colour should go there
+        pickerView.subviews[2].backgroundColor = UIColor.white // desired colour should go there
+        
+        return label
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         // Local variable inserted by Swift 4.2 migrator.
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
-
+	
         view.endEditing(true)
         let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as!
         UIImage
@@ -197,20 +222,20 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         dismiss(animated:true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(_ picker:
-        UIImagePickerController) {
+    func imagePickerControllerDidCancel(_ picker:UIImagePickerController) {
+
         dismiss(animated:true, completion: nil)
     }
     
-    @objc func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
-    {
+    
+    @objc func textViewShouldBeginEditing(_ textView: UITextView) -> Bool{
         activeField = textView
         lastOffset = self.scrollView.contentOffset
         return true
     }
     
-    @objc func textViewShouldEndEditing(_ textView: UITextView) -> Bool
-    {
+    
+    @objc func textViewShouldEndEditing(_ textView: UITextView) -> Bool{
         if(activeField==textView) {
             activeField?.resignFirstResponder()
             activeField = nil
@@ -218,21 +243,22 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         return true
     }
     
-    @objc func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
-    {
+    
+    @objc func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool{
         activeField = textField
         lastOffset = self.scrollView.contentOffset
         return true
     }
     
-    @objc func textFieldShouldEndEditing(_ textField: UITextField) -> Bool
-    {
+    
+    @objc func textFieldShouldEndEditing(_ textField: UITextField) -> Bool{
         if(activeField==textField) {
             activeField?.resignFirstResponder()
             activeField = nil
         }
         return true
     }
+    
     
     @objc func showKeyboard(notification: Notification) {
         if(activeField != nil){
@@ -256,9 +282,11 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         }
     }
     
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
     
     @objc func hideKeyboard(notification: Notification) {
         if(keyboardHeight != nil){
@@ -269,6 +297,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         keyboardHeight = nil
     }
 
+    
     private func ApplyButtonDesign(){
         //Vamos a aplicar los cambios de diseño de la Vista desde el código
         
