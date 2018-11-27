@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate
+class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, ManagerPlacesStoreObserver
 {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
@@ -21,6 +21,8 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     @IBOutlet weak var btnSelectImage: UIButton!
     @IBOutlet weak var btnUpdate: UIButton!
     @IBOutlet weak var btnDelete: UIButton!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var keyboardHeight:CGFloat!
     var activeField: UIView!
@@ -35,6 +37,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     
     override func viewDidLoad() {
         
+        activityIndicator.hidesWhenStopped = true
         
         let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
         let m_display_manager: ManagerDisplay = ManagerDisplay.shared()
@@ -147,11 +150,16 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             }
         }
         
-        m_places_manager.store()
+        m_places_manager.delegate = self
         
+        activityIndicator.startAnimating()
+        
+        m_places_manager.store()
+        /*
         m_places_manager.UpdateObservers()
         
         dismiss(animated: true, completion: nil)
+        */
      }
     
     //Comportament del botó Delete
@@ -176,19 +184,29 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     }
     
     
+    func onPlacesStoreEnd(resul:Int) {
+        self.performSelector(onMainThread: #selector(EndStore), with: nil, waitUntilDone: false)
+    }
+    
+    @objc func EndStore() {
+        activityIndicator.stopAnimating()
+        let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
+        dismiss(animated:true, completion: nil)
+
+        m_places_manager.UpdateObservers()
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int{
      return 1
      }
     
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-
         return pickerElems1.count
      }
 
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
         var label: UILabel
         
         if let view = view as? UILabel { label = view }
@@ -223,7 +241,6 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     }
     
     func imagePickerControllerDidCancel(_ picker:UIImagePickerController) {
-
         dismiss(animated:true, completion: nil)
     }
     
@@ -309,7 +326,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         btnUpdate.layer.borderWidth = 2
         btnUpdate.layer.borderColor = darkGreenColor.cgColor
     }
-    
+
 }
 
 

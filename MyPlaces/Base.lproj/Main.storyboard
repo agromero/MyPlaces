@@ -268,13 +268,22 @@
                                                     <action selector="SelectImage:" destination="OPN-dn-l27" eventType="touchDown" id="to3-cM-VXl"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dYe-hm-Shd">
+                                                <rect key="frame" x="167.5" y="303.5" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="WRj-H0-hdI"/>
+                                                    <constraint firstAttribute="height" constant="40" id="ryh-F6-mw3"/>
+                                                </constraints>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="I8r-oA-0j5" secondAttribute="bottom" constant="22" id="93L-pT-24f"/>
                                             <constraint firstItem="t4G-mL-uZT" firstAttribute="leading" secondItem="N4w-ZN-azc" secondAttribute="leading" id="D0r-8C-0FX"/>
                                             <constraint firstItem="N4w-ZN-azc" firstAttribute="top" secondItem="9Ss-TZ-3Mt" secondAttribute="bottom" constant="4" id="DhC-4F-qib"/>
+                                            <constraint firstItem="dYe-hm-Shd" firstAttribute="centerX" secondItem="5cd-dF-rr8" secondAttribute="centerX" id="If7-qA-EAE"/>
                                             <constraint firstItem="t4G-mL-uZT" firstAttribute="trailing" secondItem="6R2-GJ-pHF" secondAttribute="trailing" id="Ipo-C9-e52"/>
+                                            <constraint firstItem="dYe-hm-Shd" firstAttribute="centerY" secondItem="5cd-dF-rr8" secondAttribute="centerY" id="KXd-lC-sag"/>
                                             <constraint firstAttribute="bottom" secondItem="sX7-oR-KkS" secondAttribute="bottom" constant="22" id="NAb-Ok-7Np"/>
                                             <constraint firstItem="t4G-mL-uZT" firstAttribute="leading" secondItem="9Ss-TZ-3Mt" secondAttribute="leading" id="OUs-i5-QRT"/>
                                             <constraint firstItem="vLA-GC-EB7" firstAttribute="top" secondItem="N4w-ZN-azc" secondAttribute="bottom" constant="2" id="S4j-JH-neq"/>
@@ -313,6 +322,7 @@
                         <viewLayoutGuide key="safeArea" id="qRa-vc-7uE"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="dYe-hm-Shd" id="eid-JZ-EAW"/>
                         <outlet property="btnDelete" destination="sX7-oR-KkS" id="uQA-rC-LV5"/>
                         <outlet property="btnSelectImage" destination="vLA-GC-EB7" id="p2y-ac-ZRd"/>
                         <outlet property="btnUpdate" destination="WbM-3R-dhy" id="AX6-Er-1XV"/>

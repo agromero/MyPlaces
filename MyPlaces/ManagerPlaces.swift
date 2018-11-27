@@ -10,19 +10,32 @@ import Foundation
 import MapKit
 
 
-
 protocol ManagerPlacesObserver
 {
     func onPlacesChange()
 }
 
-class ManagerPlaces : Codable {
+
+protocol ManagerPlacesStoreObserver
+{
+    func onPlacesStoreEnd(resul:Int)
+}
+
+
+class ManagerPlaces : NSObject,Codable {
+    
     //******************************
     //Observador
+    
     public var m_observers = Array<ManagerPlacesObserver>()
     var places:[Place] = []
+    
     //******************************
- 
+    //Observador del Store
+    
+    public var delegate:ManagerPlacesStoreObserver? = nil
+    
+    
     //******************************************
     // Singleton
  
@@ -46,12 +59,14 @@ class ManagerPlaces : Codable {
     //******************************
     //enums per al JSON
     //
+    
     enum CodingKeys: String, CodingKey {
         case places
     }
     enum PlacesTypeKey: CodingKey {
         case type
     }
+    
     //******************************
 
 
@@ -137,7 +152,8 @@ class ManagerPlaces : Codable {
         try decode(from:decoder)
     }
     
-    func store()
+    
+    @objc func storeInternal()
     {
         do{
 	        let encoder = JSONEncoder()
@@ -153,10 +169,21 @@ class ManagerPlaces : Codable {
         catch
         {
         }
+        
+        Thread.sleep(forTimeInterval: 3)
+        
+        self.delegate?.onPlacesStoreEnd(resul:1)
+        
+    }
+
+    
+    func store() {
+        performSelector(inBackground: #selector(storeInternal), with: nil)
+        
     }
     
-    static func load() -> ManagerPlaces?
-    {
+    
+    static func load() -> ManagerPlaces?{
         var resul:ManagerPlaces? = nil
         let data_str = FileSystem.Read()
         if(data_str != "") {
