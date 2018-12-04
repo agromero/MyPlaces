@@ -8,10 +8,13 @@
 
 import Foundation
 import MapKit
+import UserNotifications
 
 class ManagerLocation: NSObject, CLLocationManagerDelegate
 {
     var m_locationManager:CLLocationManager!
+    
+    var firsTime:Bool = true
 
     private static var sharedManagerLocation: ManagerLocation = {
         
@@ -39,20 +42,59 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
                 //singletonManager!.m_locationManager.startUpdatingLocation()
                 singletonManager!.startLocation()
             }
+            
+            //Pedimos permiso para lanzar las notificaciones locales
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound, .badge])
+            { (granted, error) in
+                // Enable or disable features based on authorization.
+            }
         }
         return singletonManager!
     }()
 
+    
     class func shared() -> ManagerLocation {
         return sharedManagerLocation
     }
+    
     
     func startLocation() {
         self.m_locationManager.startUpdatingLocation()
     }
 
+    
     public func GetLocation()->CLLocationCoordinate2D {
         return (self.m_locationManager!.location?.coordinate)!
+    }
+
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
+        
+        if (status == .authorizedWhenInUse) {
+            self.m_locationManager.startUpdatingLocation()
+        }
+    }
+   
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        
+        let location:CLLocation = locations[locations.endIndex-1]
+        
+        if(firsTime){
+            let content = UNMutableNotificationContent()
+            content.title = "Meeting Reminder"
+            content.subtitle = "Message subtitle"
+            content.body = "Don't forget to bring coffee."
+            content.badge = 1
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+            
+            let requestIdentifier = "demoNotification"
+            let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request,withCompletionHandler: { (error) in })
+            // Handle error
+
+            firsTime = false;
+        }
     }
     
 }

@@ -8,14 +8,13 @@
 
 import UIKit
 
+
 class FirstViewController: UITableViewController, ManagerPlacesObserver {
     
     let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
     let m_location_manager: ManagerLocation = ManagerLocation.shared()
     let m_display_manager : ManagerDisplay = ManagerDisplay.shared()
     
-    let aplicaDisseny = 0 // 0 = Sense Disseny // 1 = Amb Disseny
-
     override func viewDidLoad() {
         
         super.viewDidLoad()

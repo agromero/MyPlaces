@@ -33,7 +33,6 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
 
     // Places types
     let pickerElems1 = ["Generic place", "Touristic place"]
-    let aplicaDisseny = 0 // 0 = Sense Disseny // 1 = Amb Disseny
     
     override func viewDidLoad() {
         
@@ -68,7 +67,6 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             textName.text = place!.name
             textDescription.text = place!.description
             imagePicked.image = UIImage(contentsOfFile: m_places_manager.GetPathImage(p: place!))
-
         }
         else{
             //Es un place Nou (NEW), mostrem els camps a omplir
@@ -77,14 +75,20 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             
             //Ocultem el botó Delete perquè no hem creat encara el Place
             btnDelete.isHidden = true
-            textName.text = "Enter Title here"
-            textDescription.text = "Enter Description here"
+            
+            //Seteamos los placeholder
+            self.textName.placeholder = "PlaceName"
+            self.textName.textColor = UIColor.lightGray
+            
+            self.textDescription.text = "PlacesDescription"
+            self.textDescription.textColor = UIColor.lightGray
         }
-
+        
+        textName.textColor = UIColor.white
+        //textDescription.textColor = UIColor.white
+        
         imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
         imagePicked.layer.borderColor = UIColor.white.cgColor
-        textName.textColor = UIColor.white
-        textDescription.textColor = UIColor.white
         
         // Soft keyboard Control
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(dismissKeyboard))
@@ -114,6 +118,23 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         self.present(imagePicker, animated: true, completion: nil)
     }
 
+    //Funciones para simular un placeholder con el UITextView
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textDescription.textColor == UIColor.lightGray {
+            textDescription.text = ""
+            textDescription.textColor = UIColor.white
+        }
+    }
+    
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textDescription.text == "" {
+            textDescription.text = "PlacesDescription"
+            textDescription.textColor = UIColor.lightGray
+        }
+    }
+    
+    
     //Comportament del botó Update/New
     @IBAction func Update(_ sender: Any) {
         
@@ -136,13 +157,11 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             case 0:
                 //Generic Place
                 let newplace = Place(name: textName.text!, description: textDescription.text!, image_in: imgdata)
-                //newplace.location = ManagerLocation.GetLocation()
                 newplace.location = m_location_manager.GetLocation()
                 m_places_manager.append(newplace)
             case 1:
                 //Touristic Place
                 let newplace = PlaceTourist(name: textName.text!, description: textDescription.text!, discount_tourist: "10?", image_in: imgdata )
-                //newplace.location = ManagerLocation.GetLocation()
                 newplace.location = m_location_manager.GetLocation()
                 m_places_manager.append(newplace)
             default:
@@ -207,6 +226,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
 
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
         var label: UILabel
         
         if let view = view as? UILabel { label = view }
@@ -217,14 +237,13 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         label.font = UIFont(name: "Arial", size: 16) // or UIFont.boldSystemFont(ofSize: 20)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
-        
+ 
         label.text = pickerElems1[row] // implemented elsewhere
         
         //color  and center the label's background
-        //pickerView.backgroundColor = UIColor.darkGreen
         pickerView.subviews[1].backgroundColor = UIColor.white // desired colour should go there
         pickerView.subviews[2].backgroundColor = UIColor.white // desired colour should go there
-        
+ 
         return label
     }
     
