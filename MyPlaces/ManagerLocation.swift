@@ -80,6 +80,7 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
         
         let location:CLLocation = locations[locations.endIndex-1]
         
+        
         if(firsTime){
             let content = UNMutableNotificationContent()
             content.title = "Meeting Reminder"
@@ -98,3 +99,4 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
     }
     
 }
+

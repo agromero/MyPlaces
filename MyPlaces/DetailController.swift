@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, ManagerPlacesStoreObserver
 {
     @IBOutlet weak var scrollView: UIScrollView!
@@ -32,20 +31,18 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     var place:Place? = nil
     var imgdata:Data? = nil
 
-    // Places types
-    let pickerElems1 = ["Generic place", "Touristic place"]
-    
-    
+    let pickerElems1 = ["Generic place", "Touristic place"]     // Places types
+
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+
     override func viewDidLoad() {
         
-
         activityIndicator.hidesWhenStopped = true
         
         activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
         activityIndicator.layer.cornerRadius = 5
         activityIndicator.style = .whiteLarge
         
-
         let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
         let m_display_manager: ManagerDisplay = ManagerDisplay.shared()
 
@@ -53,11 +50,10 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
 
         //Aplicamos los aspectos de diseño
         m_display_manager.ApplyRecursiveBackground(v: self.view)
+        m_display_manager.ApplyRecursiveButtonStyle(v: self.view)
         m_display_manager.ApplyNavigationBarStyle(vc: self)
         
-        m_display_manager.ApplyRecursiveButtonStyle(v: self.view)
-        m_display_manager.ApplyDetailDesign(v: self.view)
-
+        
         //Sempre mostrem el Picker
         viewPicker.delegate = self
         viewPicker.dataSource = self

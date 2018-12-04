@@ -170,7 +170,7 @@ class ManagerPlaces : NSObject,Codable {
         {
         }
         
-        Thread.sleep(forTimeInterval: 3)
+        Thread.sleep(forTimeInterval: 1)
         
         self.delegate?.onPlacesStoreEnd(resul:1)
         

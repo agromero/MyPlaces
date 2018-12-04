@@ -73,6 +73,8 @@ class ManagerDisplay : Codable {
                 subview.backgroundColor = darkColor2
                 subview.clipsToBounds = true
                 subview.tintColor = UIColor.white
+                subview.layer.borderColor = UIColor.white.cgColor
+                subview.layer.borderWidth = 1
             }
             ApplyRecursiveButtonStyle(v:subview)
         }
@@ -86,20 +88,24 @@ class ManagerDisplay : Codable {
     
     func ApplyNavigationBarStyle(vc:UIViewController){
         //Barra de navegación
+
         vc.navigationController?.navigationBar.isTranslucent = true
-        vc.navigationController?.navigationBar.barStyle = UIBarStyle.black
+        vc.navigationController?.navigationBar.barStyle = .black
         vc.navigationController?.navigationBar.tintColor = .white
         vc.navigationItem.rightBarButtonItem?.image = UIImage(named: "pinplus1")
-        
-        
+
         let logo = UIImage(named: "myplaces_logo")
         let imageView = UIImageView(frame: CGRect(x: 300, y: 0, width: 400, height: 150))
         imageView.contentMode = .scaleAspectFit
         imageView.image = logo
         vc.navigationItem.titleView = imageView
+        
+        vc.tabBarController?.tabBar.barTintColor =  darkColor2
+        vc.tabBarController?.tabBar.tintColor = .white
     
     }
     
+   
     func ApplyCellDesign(cell: PlaceCell) {
         //Color Fondo de la celda
         cell.contentView.backgroundColor = darkColor2
@@ -118,13 +124,6 @@ class ManagerDisplay : Codable {
         view.backgroundColor = darkColor3
         cell.selectedBackgroundView? = view
     }
-    
-
-    
-    func ApplyDetailDesign(v: UIView)
-    {
-
-    }
-    
+   
 
 }

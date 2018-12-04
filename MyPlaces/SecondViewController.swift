@@ -159,9 +159,9 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         }
 
    
-  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
     
-        print("annotation title == \(String(describing: view.annotation?.title!))")
+        print("Place seleccionado == \(String(describing: view.annotation?.title!))")
 
         for v in view.subviews{
             if v.subviews.count > 0{
@@ -188,7 +188,3 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     }
 
 }
-
-
-
-
