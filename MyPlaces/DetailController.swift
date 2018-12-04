@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, ManagerPlacesStoreObserver
 {
     @IBOutlet weak var scrollView: UIScrollView!
@@ -67,9 +68,16 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             textName.text = place!.name
             textDescription.text = place!.description
             imagePicked.image = UIImage(contentsOfFile: m_places_manager.GetPathImage(p: place!))
+            
+            textName.textColor = UIColor.white
+            textDescription.textColor = UIColor.white
+            
+            textName.backgroundColor = darkColor1
+            textDescription.backgroundColor = darkColor1
+            
         }
         else{
-            //Es un place Nou (NEW), mostrem els camps a omplir
+            //Es un place Nou (NEW/ADD), mostrem els camps a omplir
             btnUpdate.setTitle("New", for: .normal)
             btnUpdate.setTitle("New", for: .highlighted)
             
@@ -77,16 +85,18 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
             btnDelete.isHidden = true
             
             //Seteamos los placeholder
-            self.textName.placeholder = "PlaceName"
-            self.textName.textColor = UIColor.lightGray
+            //textName.placeholder = "Place Name"
+            textName.attributedPlaceholder = NSAttributedString(string: "Place Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            textName.textColor = UIColor.lightGray
             
-            self.textDescription.text = "PlacesDescription"
-            self.textDescription.textColor = UIColor.lightGray
+            textDescription.text = "Place Description"
+            textDescription.textColor = UIColor.lightGray
+            
+            textName.backgroundColor = darkColor1
+            textDescription.backgroundColor = darkColor1
+
         }
-        
-        textName.textColor = UIColor.white
-        //textDescription.textColor = UIColor.white
-        
+    
         imagePicked.layer.borderWidth = 1  //Imatge: Temporalment afegim un border
         imagePicked.layer.borderColor = UIColor.white.cgColor
         
@@ -333,18 +343,6 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         keyboardHeight = nil
     }
 
-    
-    private func ApplyButtonDesign(){
-        //Vamos a aplicar los cambios de diseño de la Vista desde el código
-        
-        let darkGreenColor = UIColor(red: 0/255.0, green: 90/255.0, blue: 0/255.0, alpha: 1.0)
-        
-        //Diseño Botón Update
-        
-        btnUpdate.backgroundColor = UIColor.clear
-        btnUpdate.layer.borderWidth = 2
-        btnUpdate.layer.borderColor = darkGreenColor.cgColor
-    }
 
 }
 
@@ -358,5 +356,4 @@ fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [U
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
 }
-
 
