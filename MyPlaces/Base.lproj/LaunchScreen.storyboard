@@ -18,35 +18,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="© Agustí Romero 2018" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OGs-cI-IxS">
-                                <rect key="frame" x="121.5" y="627" width="132" height="15"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LaunchScreenMP" translatesAutoresizingMaskIntoConstraints="NO" id="mUW-Gp-xb7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="© Agustí Romero 2018" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OGs-cI-IxS">
+                                <rect key="frame" x="122" y="627" width="131" height="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="is loading..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CuL-D4-SdC">
-                                <rect key="frame" x="131" y="320" width="113" height="27"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="MyPlaces" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jJx-9V-ZQH">
-                                <rect key="frame" x="82" y="227" width="211" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="211" id="bCJ-CZ-apD"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="CuL-D4-SdC" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="WOF-L2-nJn"/>
-                            <constraint firstItem="OGs-cI-IxS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="hq5-fM-YsG"/>
-                            <constraint firstItem="jJx-9V-ZQH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="phj-zH-9PP"/>
-                            <constraint firstItem="CuL-D4-SdC" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="s2B-0U-e2s"/>
-                            <constraint firstItem="CuL-D4-SdC" firstAttribute="top" secondItem="jJx-9V-ZQH" secondAttribute="bottom" constant="50" id="veI-nV-RtT"/>
+                            <constraint firstItem="OGs-cI-IxS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="122" id="NN7-w7-kfT"/>
+                            <constraint firstItem="OGs-cI-IxS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eNh-zN-sGC"/>
+                            <constraint firstItem="OGs-cI-IxS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="607" id="erP-Wv-FHM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -56,4 +43,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LaunchScreenMP" width="375" height="667"/>
+    </resources>
 </document>

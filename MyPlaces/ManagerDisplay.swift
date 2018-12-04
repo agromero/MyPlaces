@@ -91,13 +91,13 @@ class ManagerDisplay : Codable {
         vc.navigationController?.navigationBar.tintColor = .white
         vc.navigationItem.rightBarButtonItem?.image = UIImage(named: "pinplus1")
         
-        /*
-        let logo = UIImage(named: "mpt1")
+        
+        let logo = UIImage(named: "myplaces_logo")
         let imageView = UIImageView(frame: CGRect(x: 300, y: 0, width: 400, height: 150))
         imageView.contentMode = .scaleAspectFit
         imageView.image = logo
         vc.navigationItem.titleView = imageView
-        */
+    
     }
     
     func ApplyCellDesign(cell: PlaceCell) {

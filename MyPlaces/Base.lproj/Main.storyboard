@@ -123,11 +123,11 @@
             </objects>
             <point key="canvasLocation" x="-131" y="-453"/>
         </scene>
-        <!--Mapa-->
+        <!--Map-->
         <scene sceneID="qcm-d5-A1R">
             <objects>
                 <navigationController id="hLa-rZ-AKi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Mapa" image="second" id="dIM-Ft-eL1"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="second" id="dIM-Ft-eL1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9Ix-mp-QHF">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -347,8 +347,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="first" width="25.600000381469727" height="25.600000381469727"/>
+        <image name="second" width="25.600000381469727" height="25.600000381469727"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ngR-ci-aUJ"/>

@@ -35,10 +35,17 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
     // Places types
     let pickerElems1 = ["Generic place", "Touristic place"]
     
+    
     override func viewDidLoad() {
         
+
         activityIndicator.hidesWhenStopped = true
         
+        activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        activityIndicator.layer.cornerRadius = 5
+        activityIndicator.style = .whiteLarge
+        
+
         let m_places_manager: ManagerPlaces = ManagerPlaces.shared()
         let m_display_manager: ManagerDisplay = ManagerDisplay.shared()
 
@@ -47,6 +54,7 @@ class DetailController: UIViewController,UITextViewDelegate,UIPickerViewDelegate
         //Aplicamos los aspectos de diseño
         m_display_manager.ApplyRecursiveBackground(v: self.view)
         m_display_manager.ApplyNavigationBarStyle(vc: self)
+        
         m_display_manager.ApplyRecursiveButtonStyle(v: self.view)
         m_display_manager.ApplyDetailDesign(v: self.view)
 
