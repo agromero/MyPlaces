@@ -105,13 +105,13 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
                 let place_id:String = annotation.place_id
                 let place = m_places_manager.GetItemById(id: place_id)
                 
-                // Left Accessory
+                // Right Accessory
                 let pinAccessory = UILabel(frame: CGRect(x: 0,y: 0,width: 50,height: 30))
                 pinAccessory.text = distanceText
-                pinAccessory.font = UIFont(name: "Verdana", size: 8)
-                pinAccessory.textColor = .red
+                pinAccessory.font = UIFont(name: "HelveticaNeue", size: 9)
+                pinAccessory.textColor = .lightGray
                 
-                // Right accessory
+                // Left accessory
                 //Default Values
                 var pinImage = UIImage(named: "info")
                 var pinSubtitle = ""
@@ -132,11 +132,14 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
                 pinView.canShowCallout = true
                 pinView.calloutOffset = CGPoint(x: -5, y: 5)
                 pinView.setSelected(true,animated: true)
+                
                 pinView.leftCalloutAccessoryView = pinButton
                 pinView.rightCalloutAccessoryView = pinAccessory
+                
                 annotation.subtitle = pinSubtitle
- 
-
+                
+  
+                
             }
             return pinView
         }
@@ -163,13 +166,26 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
     
         print("Place seleccionado == \(String(describing: view.annotation?.title!))")
 
-        for v in view.subviews{
-            if v.subviews.count > 0{
-                v.subviews[0].backgroundColor = UIColor.lightGray
-                }
+        for v in view.subviews {
+            if v.subviews.count > 0 {
+                v.subviews[0].backgroundColor = UIColor.black
+                v.subviews[0].alpha = 0.8
             }
         }
+        
+        self.ReplaceColorText(v:view)
 
+    }
+    /*
+    if(self.m_locationManager.location != nil){
+        let current_loc:CLLocation  = self.m_locationManager!.location!
+        let annotation:MKMyPointAnnotation  = view.annotation as! MKMyPointAnnotation
+        let obj_loc:CLLocation = CLLocation(latitude: annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
+        let distance:CLLocationDistance = (current_loc.distance(from: obj_loc))
+        annotation.subtitle = String(format: "%.2f m", distance)
+    }
+    */
+    
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         let region = MKCoordinateRegion(center: userLocation.coordinate,
@@ -182,6 +198,22 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         self.RemoveMarkers()
         self.AddMarkers()
     }
+
+    
+    func ReplaceColorText(v:UIView){
+
+        for subview in v.subviews {
+            if((subview as? UILabel) != nil) {
+                
+                (subview as? UILabel)?.textColor = UIColor.white
+            }
+            else
+            {
+                ReplaceColorText(v:subview)
+            }
+        }
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
