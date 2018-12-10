@@ -42,23 +42,20 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         self.m_map.showsUserLocation = true
         
         m_places_manager.addObserver(object: self)
-        
 
         AddMarkers()
-        
     }
 
-
     
-    func RemoveMarkers()
-    {
+    func RemoveMarkers(){
+        
         let lista = self.m_map.annotations.filter { !($0 is MKUserLocation) }
         self.m_map.removeAnnotations(lista)
     }
 
     
-    func AddMarkers()
-    {
+    func AddMarkers(){
+        
         for i in 0..<m_places_manager.GetCount() {
             let item = m_places_manager.GetItemAt(position: i)
             
@@ -74,77 +71,87 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         }
     }
 
-
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
-    {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         
         if annotation is MKUserLocation {
             return nil
         }
-        
+        else
         if let annotation = annotation as? MKMyPointAnnotation
         {
+            let identifier = "CustomAnnotationView"
+            var pinView =     MKAnnotationView(annotation: annotation, reuseIdentifier: "customannotation")
 
-            let identifier = "CustomPinAnnotationView"
-            var pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customannotation")
-
-            if let dequeuedView = self.m_map?.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
+            if let dequeuedView =
+                self.m_map?.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
                 dequeuedView.annotation = annotation
                 pinView = dequeuedView
                 
             } else {
                 
-                //Calculate current distance to location
-                let current_loc:CLLocation = CLLocation(latitude: self.m_location_manager.GetLocation().latitude,longitude:self.m_location_manager.GetLocation().longitude)
-                let obj_loc:CLLocation = CLLocation(latitude:
-                    annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
-                let distance:CLLocationDistance = (current_loc.distance(from: obj_loc))
-                let distanceText = String(format: "%.2f m", distance)
-
                 //Localizamos el place para usar información
                 let place_id:String = annotation.place_id
                 let place = m_places_manager.GetItemById(id: place_id)
                 
-                // Right Accessory
-                let pinAccessory = UILabel(frame: CGRect(x: 0,y: 0,width: 50,height: 30))
-                pinAccessory.text = distanceText
-                pinAccessory.font = UIFont(name: "HelveticaNeue", size: 9)
-                pinAccessory.textColor = .lightGray
+                 // Left accessory
+                var pinImage = UIImage(named: "info") // Default value
+                var pinSubtitle = "" // Default value
+                if ((place.type) == .GenericPlace){ pinImage = UIImage(named: "infoblue"); pinSubtitle = "Generic Place"}
+                if ((place.type) == .TouristicPlace){ pinImage = UIImage(named: "infored"); pinSubtitle = "Touristic Place"}
                 
-                // Left accessory
-                //Default Values
-                var pinImage = UIImage(named: "info")
-                var pinSubtitle = ""
-                if ((place.type) == .GenericPlace){
-                    pinImage = UIImage(named: "infoblue")
-                    pinSubtitle = "Generic Place"
-                }
-                if ((place.type) == .TouristicPlace){
-                    pinImage = UIImage(named: "infored")
-                    pinSubtitle = "TouristicPlace"
-                }
                 let pinButton = UIButton(type: .custom)
                 pinButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
                 pinButton.setImage(pinImage, for: UIControl.State())
+ 
+                // Right Accessory
+                let pinAccessory = UITextView(frame: CGRect(x: 0,y: 0,width: 50,height: 40))
+                pinAccessory.backgroundColor = UIColor.black
+                pinAccessory.text = pinSubtitle
+                pinAccessory.textAlignment = .center
+                pinAccessory.font = UIFont(name: "HelveticaNeue", size: 10)
+                pinAccessory.textColor = .lightGray
                 
                 //Draw Pin Annotation
                 pinView.image = UIImage(named:"purplepin")
                 pinView.canShowCallout = true
                 pinView.calloutOffset = CGPoint(x: -5, y: 5)
-                pinView.setSelected(true,animated: true)
-                
+                //pinView.setSelected(true,animated: true)
                 pinView.leftCalloutAccessoryView = pinButton
                 pinView.rightCalloutAccessoryView = pinAccessory
                 
-                annotation.subtitle = pinSubtitle
-                
-  
-                
+                //annotation.subtitle = pinSubtitle
             }
             return pinView
         }
         return nil
- }
+    }
+
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+        
+        if let annotation = view.annotation as? MKMyPointAnnotation
+        {
+            print("Place seleccionado == \(String(describing: view.annotation?.title!))")
+            
+            if(self.m_location_manager.GetLocation() != nil){
+                let annotation:MKMyPointAnnotation  = view.annotation as! MKMyPointAnnotation
+                let current_loc_tmp:CLLocationCoordinate2D  = self.m_location_manager.GetLocation()
+                let current_loc = CLLocation(latitude: current_loc_tmp.latitude, longitude: current_loc_tmp.longitude)
+                let obj_loc:CLLocation = CLLocation(latitude: annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
+                let distance:CLLocationDistance = (current_loc.distance(from: obj_loc))
+                annotation.subtitle = String(format: "distance: %.2f m", distance)
+            }
+            
+            for v in view.subviews {
+                if v.subviews.count > 0 {
+                    v.subviews[0].backgroundColor = UIColor.black
+                    v.subviews[0].alpha = 0.8
+                }
+            }
+            self.ReplaceColorText(v:view)
+        }
+    }
 
 
     func mapView(_ mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -158,38 +165,15 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         dc.place = place
         
         present(dc, animated: true, completion: nil)
-
         }
 
-   
-   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
-    
-        print("Place seleccionado == \(String(describing: view.annotation?.title!))")
 
-        for v in view.subviews {
-            if v.subviews.count > 0 {
-                v.subviews[0].backgroundColor = UIColor.black
-                v.subviews[0].alpha = 0.8
-            }
-        }
-        
-        self.ReplaceColorText(v:view)
-
-    }
-    /*
-    if(self.m_locationManager.location != nil){
-        let current_loc:CLLocation  = self.m_locationManager!.location!
-        let annotation:MKMyPointAnnotation  = view.annotation as! MKMyPointAnnotation
-        let obj_loc:CLLocation = CLLocation(latitude: annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
-        let distance:CLLocationDistance = (current_loc.distance(from: obj_loc))
-        annotation.subtitle = String(format: "%.2f m", distance)
-    }
-    */
-    
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        let region = MKCoordinateRegion(center: userLocation.coordinate,
-                                        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+        
+        let zoom = 0.05
+        let region = MKCoordinateRegion(center: userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: zoom, longitudeDelta: zoom))
+        
         self.m_map.setRegion(region, animated: true)
     }
  

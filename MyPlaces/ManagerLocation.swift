@@ -15,7 +15,8 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
     var m_locationManager:CLLocationManager!
     
     var firsTime:Bool = true
-
+    
+    
     private static var sharedManagerLocation: ManagerLocation = {
         
         var singletonManager:ManagerLocation?
@@ -30,7 +31,6 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
             singletonManager!.m_locationManager.allowsBackgroundLocationUpdates = true // Permitir updates en background
             singletonManager!.m_locationManager.distanceFilter = 500 // Minima distancia para que detecte cambio de posición = 500 metros
             singletonManager!.m_locationManager.desiredAccuracy = kCLLocationAccuracyBest // Que use la forma más optima para calcular la geolocalización.
-            
 
             let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
 
@@ -68,24 +68,24 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
         return (self.m_locationManager!.location?.coordinate)!
     }
 
-    
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
         
         if (status == .authorizedWhenInUse) {
             self.m_locationManager.startUpdatingLocation()
         }
     }
+    
    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
         let location:CLLocation = locations[locations.endIndex-1]
         
-        
         if(firsTime){
             let content = UNMutableNotificationContent()
-            content.title = "Meeting Reminder"
-            content.subtitle = "Message subtitle"
-            content.body = "Don't forget to bring coffee."
+            content.title = "Notificació de Proximitat"
+            content.subtitle = "Estas acercándote a un Place"
+            content.body = "Mira la descripción del place para más información"
             content.badge = 1
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
             
