@@ -84,8 +84,8 @@ class ManagerLocation: NSObject, CLLocationManagerDelegate
         if(firsTime){
             let content = UNMutableNotificationContent()
             content.title = "Notificació de Proximitat"
-            content.subtitle = "Estas acercándote a un Place"
-            content.body = "Mira la descripción del place para más información"
+            content.subtitle = "Estas apropan-te a un Place"
+            content.body = "Mira la descripció del place per a més informació"
             content.badge = 1
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
             

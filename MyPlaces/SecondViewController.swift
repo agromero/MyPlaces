@@ -21,6 +21,7 @@ class PlaceAnnotation: NSObject, MKAnnotation {
     }
 }
 
+
 class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesObserver {
 
     @IBOutlet weak var m_map: MKMapView!
@@ -116,9 +117,9 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
                 pinView.image = UIImage(named:"purplepin")
                 pinView.canShowCallout = true
                 pinView.calloutOffset = CGPoint(x: -5, y: 5)
-                //pinView.setSelected(true,animated: true)
                 pinView.leftCalloutAccessoryView = pinButton
                 pinView.rightCalloutAccessoryView = pinAccessory
+                //pinView.setSelected(true,animated: true)
                 
                 //annotation.subtitle = pinSubtitle
             }
@@ -149,6 +150,7 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
                     v.subviews[0].alpha = 0.8
                 }
             }
+            
             self.ReplaceColorText(v:view)
         }
     }
@@ -166,7 +168,6 @@ class SecondViewController: UIViewController, MKMapViewDelegate, ManagerPlacesOb
         
         present(dc, animated: true, completion: nil)
         }
-
 
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
